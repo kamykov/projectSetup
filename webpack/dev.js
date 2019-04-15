@@ -1,13 +1,18 @@
+const path =  require ('path')
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const common = require("./webpack.common.js");
+const common = require("./config.js");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const Package = require("../package.json");
+const ROOT_DIR = process.cwd();
 
 module.exports = merge(common, {
   mode: "development",
-  devtool: "inline-source-map",
+  devtool: "source-map",
   devServer: {
     contentBase: "./dist",
+    port: 3501,
     hot: true
   },
   module: {
@@ -15,12 +20,15 @@ module.exports = merge(common, {
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: "style-loader"
+          { loader: "style-loader"
           },
           {
-            loader: "css-loader"
-          },
+            loader: "css-loader",
+                         
+                 options: {
+                   modules: true,
+                 },
+                     },
           {
             loader: "sass-loader"
           }
@@ -31,9 +39,10 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: "ReactReduxSassStarterkit",
+      title: Package.description,
       inject: false,
-      template: require("html-webpack-template"),
+      template: path.join(ROOT_DIR, 'src', 'index.ejs'),
+      //template: require("html-webpack-template"),
       bodyHtmlSnippet: '<main class="main" id="app"></main>'
     })
   ]

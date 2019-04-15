@@ -1,4 +1,5 @@
 import React from "react";
+import Box from "./components/Box.jsx";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
             Hello and Welcome, React-Redux-Sass Starter kit is successfully
             build and your kit is ready to use
           </h1>
+          <Box text="Info text" />
         </section>
         <footer className="header">App Footer</footer>
       </React.Fragment>
