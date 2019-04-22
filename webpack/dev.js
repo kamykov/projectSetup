@@ -1,27 +1,27 @@
-const path =  require ('path')
+const path = require("path");
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const common = require("./webpack.common.js");
+const baseConfig = require("./config.js");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const Package = require("../package.json");
 const ROOT_DIR = process.cwd();
 
-module.exports = merge(common, {
+module.exports = merge(baseConfig, {
   mode: "development",
-  devtool: "inline-source-map",
+  devtool: "source-map",
   devServer: {
     contentBase: "./dist",
     port: 3501,
-    hot: true
+    hot: true,
+    open: true
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: "style-loader"
-          },
+          { loader: "style-loader" },
           {
             loader: "css-loader"
           },
@@ -35,11 +35,11 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: "Setup Project",
+      title: Package.description,
       inject: false,
-      template: path.join(ROOT_DIR, 'src', 'index.ejs'),
+      template: path.join(ROOT_DIR, "src", "templates", "index.ejs")
       //template: require("html-webpack-template"),
-      bodyHtmlSnippet: '<main class="main" id="app"></main>'
+      //bodyHtmlSnippet: '<main class="main" id="app"></main>'
     })
   ]
 });
