@@ -1,0 +1,9 @@
+dist
+src/i18n
+*.css
+*.scss
+*.html
+*.json
+*.snap
+src/**/__tests__/
+src/test/
