@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "webpack --watch",
-    "start": "webpack-dev-server --config ./webpack/dev.js --progress --inline",
+    "start": "webpack-dev-server --config ./webpack/dev.js --progress",
     "prod": "webpack-dev-server --open --config ./webpack/prod.js",
     "build": "webpack --config ./webpack/prod.js",
     "analyzer": "node ./webpack/analyzer.js"
