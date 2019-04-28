@@ -1,28 +1,23 @@
 @import "variables.sass";
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
-  padding: 0;
+  padding: $gap;
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
   color: $textColor;
-  height: 100%;
+  max-height: 100%;
   background-color: $primaryColor;
+  box-sizing: border-box;
 }
 
 .main {
   height: 100%;
-  margin: $gap;
   background-color: $bgColor;
   @include boxShadow($shadow);
-}
-
-.header,
-.footer {
-  padding: 0 20px;
-  color: #fff;
-  background-color: #777777;
-  height: 50px;
-  line-height: 50px;
 }
