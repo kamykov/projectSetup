@@ -16,8 +16,8 @@ module.exports = merge(baseConfig, {
     hot: true,
     open: true,
     watchOptions: {
-      ignored: /(node_modules|dist)/,
-    },
+      ignored: /(node_modules|dist)/
+    }
   },
   module: {
     rules: [

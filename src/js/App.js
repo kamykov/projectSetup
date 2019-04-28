@@ -1,22 +1,29 @@
-import React from "react";
-import Box from "./components/Box.jsx";
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <React.Fragment>
-        <header className="header">App Header</header>
-        <section className="body">
-          <h1 className="title">
-            Hello and Welcome, React-Redux-Sass Starter kit is successfully
-            build and your kit is ready to use
-          </h1>
-          <Box text="Info text" />
-        </section>
-        <footer className="header">App Footer</footer>
-      </React.Fragment>
-    );
-  }
+import React, { useReducer, useContext } from "react";
+import Box from "./components/Box/Box.jsx";
+import Header from "./components/Header/Header";
+import Menu from "./components/Menu/Menu.jsx";
+import Page from "./components/Page/Page.jsx";
+import reducer from "./reducers/switchMenuReducer";
+
+export const appDispatch = React.createContext(null);
+
+export default function App() {
+  const [store, dispatch] = useReducer(reducer, {
+    isMenuOpen: false,
+    name: "Kris",
+    menu: [
+      { title: "Home", link: "home" },
+      { title: "O mnie", link: "omnie" },
+      { title: "Szkolenie", link: "szkolenia" },
+      { title: "Kontakt", link: "kontakt" }
+    ]
+  });
+
+  return (
+    <appDispatch.Provider value={{ store, dispatch }}>
+      <Header />
+      <Menu />
+      <Page />
+    </appDispatch.Provider>
+  );
 }
