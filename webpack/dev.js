@@ -14,7 +14,10 @@ module.exports = merge(baseConfig, {
     contentBase: "./dist",
     port: 3501,
     hot: true,
-    open: true
+    open: true,
+    watchOptions: {
+      ignored: /(node_modules|dist)/,
+    },
   },
   module: {
     rules: [
