@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { appDispatch } from "../../App";
 import "./Menu.scss";
 
@@ -10,10 +11,29 @@ export default function Menu() {
 
   const classes = isMenuOpen ? ["menu", "is-visible"] : ["menu"];
 
+  function handleClick() {
+    dispatch({ type: "SWITCH_MENU" });
+  }
+
   const menuItems = menu.map((item, index) => {
+    let { title, link } = item;
+    let half = parseInt(title.length / 2);
+    let l = title.slice(0, half);
+    let r = title.slice(half);
+
     return (
       <li className="menu__element" key={index}>
-        {item.title}
+        <NavLink
+          to={`/${link}`}
+          exact
+          className="menu__link link--surinami"
+          activeClassName="menu__link--selected"
+          onClick={handleClick}
+        >
+          <span data-letters-l={l} data-letters-r={r}>
+            {title}
+          </span>
+        </NavLink>
       </li>
     );
   });
@@ -21,8 +41,6 @@ export default function Menu() {
   function handleClick() {
     dispatch({ type: "SWITCH_MENU" });
   }
-
-  console.log(isMenuOpen);
 
   return (
     <div className={classes.join(" ")}>

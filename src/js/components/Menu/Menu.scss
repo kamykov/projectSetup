@@ -71,3 +71,89 @@
 .menu__button:hover::after {
   transform: rotate(315deg);
 }
+
+.menu__link {
+  outline: none;
+  text-decoration: none;
+  position: relative;
+  font-size: 3em;
+  line-height: 1;
+  display: inline-block;
+}
+/* Surinami */
+.link--surinami {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 3em;
+  color: #666;
+  color: #93907e;
+  padding: 0.2em 0 0.125em;
+}
+
+.link--surinami::before,
+.link--surinami::after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  z-index: -1;
+  background: #d8450b;
+  position: absolute;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.5s;
+}
+
+.link--surinami::before {
+  right: 0;
+  top: 0;
+  transform-origin: 100% 50%;
+}
+
+.link--surinami::after {
+  left: 0;
+  bottom: 0;
+  transform-origin: 0 50%;
+}
+
+.link--surinami:hover::before,
+.link--surinami:hover::after,
+.menu__link--selected::before,
+.menu__link--selected::after {
+  transform: scale3d(1, 1, 1);
+}
+
+.link--surinami span {
+  position: relative;
+  transition: color 0.5s;
+}
+
+.link--surinami:hover span {
+  color: transparent;
+  text-shadow: 1px 1px 6px #666;
+}
+
+.link--surinami span::before,
+.link--surinami span::after {
+  position: absolute;
+  color: #fff;
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.link--surinami span::before {
+  content: attr(data-letters-l);
+  left: 0;
+  transform: translate3d(-5px, 0, 0);
+}
+
+.link--surinami span::after {
+  content: attr(data-letters-r);
+  right: 0;
+  transform: translate3d(5px, 0, 0);
+}
+
+.link--surinami:hover span::before,
+.link--surinami:hover span::after {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}

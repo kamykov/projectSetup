@@ -5,3 +5,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.page__content {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.page__title {
+  text-shadow: 1px 1px 0 #fdfdfd, 2px 2px 0 rgba(81, 81, 81, 0.5),
+    0 0 1px #fdfdfd;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #666;
+  text-align: center;
+}
