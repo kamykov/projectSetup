@@ -1,7 +1,8 @@
 import React from "react";
+import Wrapper from "../../hoc/Wrapper/Wrapper";
 import "./Page.scss";
 
-export default function Page(props) {
+function Page(props) {
   const { title, img, content } = props.content;
   return (
     <div className="page">
@@ -12,3 +13,5 @@ export default function Page(props) {
     </div>
   );
 }
+
+export default Page;

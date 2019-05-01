@@ -1,0 +1,18 @@
+@import "../../../sass/variables.sass";
+
+.main {
+  z-index: 10;
+  position: absolute;
+  bottom: $gap;
+  top: $gap;
+  left: $gap;
+  right: $gap;
+  background: $bgColor;
+  transform: translateZ(0);
+  transition-property: transform;
+  transition-duration: 0.5s;
+  backface-visibility: hidden;
+}
+.main--moveout {
+  transform: scale(0.6);
+}

@@ -17,7 +17,8 @@ module.exports = merge(baseConfig, {
     open: true,
     watchOptions: {
       ignored: /(node_modules|dist)/
-    }
+    },
+    historyApiFallback: true
   },
   module: {
     rules: [

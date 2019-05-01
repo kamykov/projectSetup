@@ -1,6 +1,7 @@
 import React, { useReducer, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import MainWrapper from "./hoc/MainWrapper/MainWrapper";
 import Box from "./components/Box/Box.jsx";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu.jsx";
@@ -48,7 +49,7 @@ export default function App() {
     <Router>
       <appDispatch.Provider value={{ store, dispatch }}>
         <Menu />
-        <main className={mainClass}>
+        <MainWrapper>
           <Header />
           <Switch>
             <Route
@@ -63,7 +64,7 @@ export default function App() {
               render={props => <Page {...props} content={content["omnie"]} />}
             />
           </Switch>
-        </main>
+        </MainWrapper>
       </appDispatch.Provider>
     </Router>
   );

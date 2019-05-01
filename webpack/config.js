@@ -1,10 +1,14 @@
 const path = require("path");
 
+console.log(path.join(process.cwd(), "dist"));
+console.log(path.join(__dirname, "dist"));
+
 module.exports = {
   entry: ["./src/js/index.js", "./src/sass/main.scss"],
   output: {
     filename: "js/main.js",
-    path: path.join(process.cwd(), "dist")
+    path: path.join(process.cwd(), "dist"),
+    publicPath: "/"
   },
   module: {
     rules: [
