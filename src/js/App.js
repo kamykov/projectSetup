@@ -23,6 +23,19 @@ export default function App() {
   });
 
   const content = {
+    home: {
+      title: "Krzysztof Kamieniecki",
+      subtitle: "Webdeveloper",
+      headline: "Tworzenie i rozwój stron internetowych",
+      img: "logo.svg",
+      content: `<p> Stosuję technologie: Node.js, Express.js, Angular / React, MongoDB</p>
+          <p> Realizuję projekty [<a href="http://pl.wikipedia.org/wiki/Responsive_Web_Design"><abbr title="Responsive Web Design">RWD</abbr></a>].</p>
+          <p>Wykonuję optymalizację dla Google [<a href="http://pl.wikipedia.org/wiki/Optymalizacja_dla_wyszukiwarek_internetowych"><abbr
+                title="Search Engine Optilalization">SEO</abbr></a>].</p>
+          <p>Wykonuję graficzne elementy identyfikacji wizualnej: logo, wizytówki, papier firmowy.</p>
+          <p>Stosuję regułę <a href="http://pl.wikipedia.org/wiki/KISS_%28regu%C5%82a%29"><abbr title="Keep It Simple, Stiupid">KISS</abbr></a>,
+            - elegancja, prosta i&nbsp;przejrzysta forma.</p>`
+    },
     omnie: {
       title: "O mnie",
       img: "kk.jpg",
@@ -40,6 +53,14 @@ export default function App() {
       <h2>JAVASCRIPT</h2>
       <h2>BACKEND / CMS</h2>
       <p>Indywidualnie i grupowo. Do tej pory zrealizowałem ponad 600 godzin szkoleń.</p>`
+    },
+    kontakt: {
+      title: "kontakt",
+      img: "kk.jpg",
+      content: `<p>Dzwoń:</p>
+      <h2>500 286 440</h2>
+      <p>Pisz:</p>
+      <h2 class="email">krzysztof@thinkstudio.pl</h2>`
     }
   };
 
@@ -60,8 +81,12 @@ export default function App() {
               )}
             />
             <Route
-              path="/"
+              path="/omnie"
               render={props => <Page {...props} content={content["omnie"]} />}
+            />
+            <Route
+              path="/"
+              render={props => <Page {...props} content={content["home"]} />}
             />
           </Switch>
         </MainWrapper>

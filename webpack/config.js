@@ -17,7 +17,21 @@ module.exports = {
       //   exclude: /node_modules/,
       //   use: ['babel-loader','eslint-loader']
       // },
-      { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "babel-loader" }
+      { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "babel-loader" },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: "react-svg-loader",
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
+      }
     ]
   }
 };

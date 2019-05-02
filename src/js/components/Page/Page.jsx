@@ -1,14 +1,26 @@
 import React from "react";
+import Interweave, { Markup } from "interweave";
 import Wrapper from "../../hoc/Wrapper/Wrapper";
+import Headline from "../Headline/Headline";
 import "./Page.scss";
+import Logo from "../../../img/logo.svg";
 
 function Page(props) {
-  const { title, img, content } = props.content;
+  const { title, subtitle, headline, content } = props.content;
   return (
     <div className="page">
       <div className="page__content">
-        <h1 className="page__title">{title}</h1>
-        <div className="page__text">{content}</div>
+        <Logo />
+        <h1 className="page__title">
+          <Headline>{title}</Headline>
+        </h1>
+        <h2 className="page__subtitle">
+          {subtitle && <Headline>{subtitle}</Headline>}
+        </h2>
+        <h3 className="page__title">{headline}</h3>
+        <div className="page__text">
+          <Markup content={content} />
+        </div>
       </div>
     </div>
   );

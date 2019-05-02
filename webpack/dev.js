@@ -11,7 +11,7 @@ module.exports = merge(baseConfig, {
   mode: "development",
   devtool: "source-map",
   devServer: {
-    contentBase: "./dist",
+    contentBase: "./dist/",
     port: 3501,
     hot: true,
     open: true,
