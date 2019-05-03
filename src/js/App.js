@@ -6,14 +6,15 @@ import Box from "./components/Box/Box.jsx";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu.jsx";
 import Page from "./components/Page/Page.jsx";
-import reducer from "./reducers/switchMenuReducer";
+import reducer from "./reducers/storeReducer";
 
-export const appDispatch = React.createContext(null);
+export const Context = React.createContext(null);
 
 export default function App() {
   const [store, dispatch] = useReducer(reducer, {
     isMenuOpen: false,
     name: "Kris",
+    dots: 12,
     menu: [
       { title: "Home", link: "home" },
       { title: "O mnie", link: "omnie" },
@@ -68,7 +69,7 @@ export default function App() {
 
   return (
     <Router>
-      <appDispatch.Provider value={{ store, dispatch }}>
+      <Context.Provider value={{ store, dispatch }}>
         <Menu />
         <MainWrapper>
           <Header />
@@ -90,7 +91,7 @@ export default function App() {
             />
           </Switch>
         </MainWrapper>
-      </appDispatch.Provider>
+      </Context.Provider>
     </Router>
   );
 }

@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { appDispatch } from "../../App";
+import { Context } from "../../App";
 import "./Menu.scss";
 
 export default function Menu() {
   const {
     store: { menu, isMenuOpen },
     dispatch
-  } = useContext(appDispatch);
+  } = useContext(Context);
 
   const classes = isMenuOpen ? ["menu", "is-visible"] : ["menu"];
 

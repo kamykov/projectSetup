@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { appDispatch } from "../../App";
+import { Context } from "../../App";
 
 import "./Header.scss";
 
 export default function Header(props) {
-  const { dispatch } = useContext(appDispatch);
+  const { dispatch } = useContext(Context);
 
   function handleClick() {
     dispatch({ type: "SWITCH_MENU", text: "hello" });

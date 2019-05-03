@@ -18,6 +18,10 @@
 }
 
 .menu__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-around;
   height: 100%;
   padding: 50px;
   list-style: none;
