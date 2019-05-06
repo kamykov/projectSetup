@@ -4,14 +4,16 @@ import { SET_DOTS } from "../../actions/";
 
 import { Context } from "../../App";
 
-export default function Panel() {
-  const {
-    store: { dots },
-    dispatch
-  } = useContext(Context);
+export default function Panel(props) {
+  const { dispatch } = useContext(Context);
 
   const handleOnchange = ({ target: { value } }) => {
     dispatch({ type: SET_DOTS, value });
+  };
+  const stopAnimation = e => {
+    e.preventDefault();
+    console.log("stop");
+    //cancelAnimationFrame(rAF.current);
   };
 
   return (
@@ -21,10 +23,13 @@ export default function Panel() {
         name="dots"
         min="0"
         max="30"
-        value={dots}
+        value={props.dots}
         onChange={handleOnchange}
       />
-      <div>Value: {dots}</div>
+      <div>Value: {props.dots}</div>
+      <div>
+        <button onClick={stopAnimation}>Stop</button>
+      </div>
     </div>
   );
 }

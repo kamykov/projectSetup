@@ -1,41 +1,61 @@
-import React, { Component, useContext, useEffect } from "react";
+import React, {
+  useState,
+  useContext,
+  useRef,
+  useLayoutEffect,
+  useEffect
+} from "react";
 import { Context } from "../../App";
 
 import * as lib from "../../utils/canvasUtils";
-
 import "./Canvas.scss";
 
 export default function Canvas(props) {
   const {
     color = "rgba(255,0,0, .5)",
-    stroke = "rgba(200,200,200, .5)"
+    stroke = "rgba(200,200,200, .5)",
+    dots = props.dots
   } = props;
-  let size = {},
-    ctx,
-    points;
-  const canvasRef = React.createRef();
-  const wrapperRef = React.createRef();
-  const {
-    store: { dots },
-    dispatch
-  } = useContext(Context);
+  let ctx;
 
-  window.addEventListener("resize", handleResize);
-  useEffect(() => {
-    cancelAnimationFrame(rAF);
-    size = lib.dim(wrapperRef.current);
+  const [size, setSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+  const [points, setPoints] = useState(() =>
+    lib.generate(dots, lib.dotInDiv, size, 2, 2, color)
+  );
+  const {
+    store: { isMenuOpen }
+  } = useContext(Context);
+  const wrapperRef = useRef();
+  const rAF = useRef();
+  const canvasRef = useRef();
+
+  useLayoutEffect(() => {
+    ctx = canvasRef.current.getContext("2d");
     canvasRef.current.width = size.width;
     canvasRef.current.height = size.height;
-    ctx = canvasRef.current.getContext("2d");
-    ctx.fillStyle = color;
     ctx.strokeStyle = stroke;
-    points = lib.generate(dots, lib.dotInDiv, size, 2, 2, color);
-    const rAF = requestAnimationFrame(updateAnimationState);
+    ctx.fillStyle = color;
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.save();
+    setPoints(() => lib.generate(dots, lib.dotInDiv, size, 2, 2, color));
+    updateAnimationState();
+    console.log("useLayoutEffect", points, size, canvasRef, ctx, rAF);
   }, [dots]);
 
-  function updateAnimationState(timestamp) {
-    //const { ctx, points, size, time, color } = state;
+  // useLayoutEffect(() => {
+  //   console.log(rAF, isMenuOpen);
+  //   if (isMenuOpen) {
+  //     cancelAnimationFrame(rAF.current);
+  //   }
+  //   return () => {
+  //     rAF.current = requestAnimationFrame(updateAnimationState);
+  //   };
+  // }, [isMenuOpen]);
 
+  function updateAnimationState() {
     lib.clearCanvas(size, ctx);
     lib.findClosest(points);
     points.forEach(point => {
@@ -45,27 +65,22 @@ export default function Canvas(props) {
       lib.drawCircle(ctx, point, 5, color);
       lib.update2(point, size);
     });
-    // this.setState(({ t, time }) => ({
-    //   t: t + 1000 / 60,
-    //   time: time + timestamp
-    // }));
-    requestAnimationFrame(updateAnimationState);
+    rAF.current = requestAnimationFrame(updateAnimationState);
   }
 
   function handleResize(e) {
-    const { color, stroke } = this.state;
-    const size = lib.dim(this.wrapperRef.current);
-    this.canvasRef.current.width = size.width;
-    this.canvasRef.current.height = size.height;
-    this.ctx.fillStyle = color;
-    this.ctx.strokeStyle = stroke;
-    this.setState({ size });
+    // if (wrapperRef.current) {
+    //   setSize({
+    //     width: 6000,
+    //     height: 6000
+    //   });
+    //   console.log(wrapperRef.current);
+    //   canvasRef.current.width = size.width;
+    //   canvasRef.current.height = size.height;
+    //   ctx.fillStyle = color;
+    //   ctx.strokeStyle = stroke;
+    // }
   }
-
-  // componentWillUnmount() {
-  //   cancelAnimationFrame(this.rAF);
-  //   window.removeEventListener("resize", this.handleResize);
-  // }
 
   return (
     <div className="wrapper" ref={wrapperRef}>

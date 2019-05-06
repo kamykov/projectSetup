@@ -12,14 +12,12 @@ function MainWrapper(props) {
     dispatch
   } = useContext(Context);
 
-  console.log(dots);
-
   const classes = isMenuOpen ? ["main main--moveout"] : ["main"];
   return (
     <main className={classes}>
       {props.children}
       <Canvas dots={dots} />
-      <Panel />
+      <Panel dots={dots} />
     </main>
   );
 }

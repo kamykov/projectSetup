@@ -8,7 +8,17 @@ import Menu from "./components/Menu/Menu.jsx";
 import Page from "./components/Page/Page.jsx";
 import reducer from "./reducers/storeReducer";
 
-export const Context = React.createContext(null);
+export const Context = React.createContext({
+  isMenuOpen: false,
+  name: "Kris",
+  dots: 12,
+  menu: [
+    { title: "Home", link: "home" },
+    { title: "O mnie", link: "omnie" },
+    { title: "Szkolenie", link: "szkolenie" },
+    { title: "Kontakt", link: "kontakt" }
+  ]
+});
 
 export default function App() {
   const [store, dispatch] = useReducer(reducer, {
