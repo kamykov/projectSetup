@@ -44,7 +44,7 @@ export default function App() {
           <p>Wykonuję optymalizację dla Google [<a href="http://pl.wikipedia.org/wiki/Optymalizacja_dla_wyszukiwarek_internetowych"><abbr
                 title="Search Engine Optilalization">SEO</abbr></a>].</p>
           <p>Wykonuję graficzne elementy identyfikacji wizualnej: logo, wizytówki, papier firmowy.</p>
-          <p>Stosuję regułę <a href="http://pl.wikipedia.org/wiki/KISS_%28regu%C5%82a%29"><abbr title="Keep It Simple, Stiupid">KISS</abbr></a>,
+          <p>Stosuję regułę <a href="http://pl.wikipedia.org/wiki/KISS_%28regu%C5%82a%29"><abbr title="Keep It Simple, Stupid">KISS</abbr></a>,
             - elegancja, prosta i&nbsp;przejrzysta forma.</p>`
     },
     omnie: {

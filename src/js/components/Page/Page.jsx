@@ -2,6 +2,7 @@ import React from "react";
 import Interweave, { Markup } from "interweave";
 import Wrapper from "../../hoc/Wrapper/Wrapper";
 import Headline from "../Headline/Headline";
+import Slide from "../Slide/Slide";
 import "./Page.scss";
 import Logo from "../../../img/logo.svg";
 
@@ -19,7 +20,9 @@ function Page(props) {
         </h2>
         <h3 className="page__title">{headline}</h3>
         <div className="page__text">
-          <Markup content={content} />
+          <Slide delay={3000}>
+            <Markup content={content} />
+          </Slide>
         </div>
       </div>
     </div>

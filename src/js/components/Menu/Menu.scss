@@ -48,6 +48,10 @@
   text-indent: 100%;
   white-space: nowrap;
   border: none;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 }
 
 .menu__button::before,

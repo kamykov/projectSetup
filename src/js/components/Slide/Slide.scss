@@ -1,0 +1,10 @@
+.slide {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 2s;
+}
+
+.slide--animated {
+  opacity: 1;
+  transform: translateY(0);
+}

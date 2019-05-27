@@ -14,7 +14,7 @@ export default function Canvas(props) {
   const {
     color = "rgba(255,0,0, .5)",
     stroke = "rgba(200,200,200, .5)",
-    dots = props.dots
+    dots = props.dots || 12
   } = props;
   let ctx;
 
@@ -22,9 +22,8 @@ export default function Canvas(props) {
     width: window.innerWidth,
     height: window.innerHeight
   });
-  const [points, setPoints] = useState(() =>
-    lib.generate(dots, lib.dotInDiv, size, 2, 2, color)
-  );
+  const allPoints = lib.generate(100, lib.dotInDiv, size, 2, 2, color);
+  const [points, setPoints] = useState(allPoints.slice(0, 12));
   const {
     store: { isMenuOpen }
   } = useContext(Context);
@@ -40,20 +39,14 @@ export default function Canvas(props) {
     ctx.fillStyle = color;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     ctx.save();
-    setPoints(() => lib.generate(dots, lib.dotInDiv, size, 2, 2, color));
+    let newPoints = allPoints.slice(0, dots);
+    setPoints(newPoints);
     updateAnimationState();
     console.log("useLayoutEffect", points, size, canvasRef, ctx, rAF);
+    return () => {
+      cancelAnimationFrame(rAF);
+    };
   }, [dots]);
-
-  // useLayoutEffect(() => {
-  //   console.log(rAF, isMenuOpen);
-  //   if (isMenuOpen) {
-  //     cancelAnimationFrame(rAF.current);
-  //   }
-  //   return () => {
-  //     rAF.current = requestAnimationFrame(updateAnimationState);
-  //   };
-  // }, [isMenuOpen]);
 
   function updateAnimationState() {
     lib.clearCanvas(size, ctx);

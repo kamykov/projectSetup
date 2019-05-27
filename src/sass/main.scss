@@ -19,3 +19,10 @@ body {
   height: 100%;
   padding: $gap;
 }
+
+a {
+  color: $primaryColor;
+  &:hover {
+    color: $primaryStrong;
+  }
+}

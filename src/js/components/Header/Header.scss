@@ -18,6 +18,10 @@
   font-weight: bold;
   font-size: 0.875rem;
   color: $primaryStrong;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 }
 
 .burger {
