@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Setup for React App",
   "main": "index.js",
+  "proxy": "http://localhost:3000/",
   "scripts": {
     "watch": "webpack --watch",
     "start": "webpack-dev-server --config ./webpack/dev.js --progress",
@@ -22,6 +23,7 @@
   "dependencies": {
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
+    "http-proxy-middleware": "^0.19.1",
     "interweave": "^11.0.0",
     "jest": "^24.8.0",
     "node-sass": "^4.11.0",
@@ -36,6 +38,7 @@
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
+    "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^2.0.1",
@@ -48,6 +51,7 @@
     "identity-obj-proxy": "^3.0.0",
     "install": "^0.12.2",
     "mini-css-extract-plugin": "^0.6.0",
+    "react-scripts": "^3.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.30.0",

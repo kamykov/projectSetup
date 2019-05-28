@@ -1,0 +1,32 @@
+@import "../../../sass/variables.sass";
+
+.loading {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $bgSemiTransparent;
+}
+
+.spinner {
+  margin: 0;
+  width: 5.5em;
+  height: 5em;
+  border: 3px solid transparent;
+  border-top-color: $primaryColor;
+  border-bottom-color: $primaryColor;
+  border-radius: 50%;
+  animation: spin-stretch 2s ease infinite;
+}
+
+@keyframes spin-stretch {
+  50% {
+    transform: rotate(360deg) scale(0.4, 0.33);
+    border-width: 8px;
+  }
+  100% {
+    transform: rotate(720deg) scale(1, 1);
+    border-width: 3px;
+  }
+}

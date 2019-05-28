@@ -5,6 +5,7 @@
 /jsdoc
 /sassdoc
 /node_modules
+/server/node_modules
 *.log
 *.swp
 /npm-debug.log
