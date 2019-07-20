@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/kamykov/projectSetup.git"
   },
-  "author": "",
+  "author": "Think Studio",
   "license": "ISC",
   "dependencies": {
     "enzyme": "^3.9.0",

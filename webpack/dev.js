@@ -38,12 +38,16 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.BannerPlugin({ banner: "Think Studio" }),
     new HtmlWebpackPlugin({
       title: Package.description,
       inject: false,
       template: path.join(ROOT_DIR, "src", "templates", "index.ejs")
       //template: require("html-webpack-template"),
       //bodyHtmlSnippet: '<main class="main" id="app"></main>'
+    }),
+    new webpack.DefinePlugin({
+      __BASE___: JSON.stringify("GLOBAL VAR!!!")
     })
   ]
 });

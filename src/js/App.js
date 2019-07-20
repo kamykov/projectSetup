@@ -15,6 +15,10 @@ import Page from "./components/Page/Page.jsx";
 import Loading from "./components/Loading/Loading.jsx";
 import reducer from "./reducers/storeReducer";
 
+if (__BASE___) {
+  console.log("__BASE___", __BASE___);
+}
+
 export const Context = React.createContext({
   isMenuOpen: false,
   name: "Kris",

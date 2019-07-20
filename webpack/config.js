@@ -1,7 +1,18 @@
 const path = require("path");
+const webpack = require("webpack");
 
 console.log(path.join(process.cwd(), "dist"));
 console.log(path.join(__dirname, "dist"));
+
+const params = require("yargs").options({
+  ts: {
+    default: "TS"
+  }
+}).argv;
+
+console.log("yargs: (%s)", params.ts);
+console.log("yargs._: ", params._);
+//console.log("__BASE__" + __BASE__);
 
 module.exports = {
   entry: ["./src/js/index.js", "./src/sass/main.scss"],
@@ -33,5 +44,6 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: []
 };
