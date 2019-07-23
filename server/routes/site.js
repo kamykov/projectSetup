@@ -2,6 +2,8 @@ const Router = require("koa-router");
 const router = new Router();
 const mongo = require("koa-mongo");
 
+const validateLoginInput = require("../validation/login");
+
 router
   .get("/data", async (ctx, next) => {
     ctx.body = await ctx.db
@@ -29,8 +31,14 @@ router
   })
   .post("/login", async (ctx, next) => {
     console.log("login", ctx.request.body);
-    ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
-    ctx.response.status = 200;
+    const { errors, isValid } = validateLoginInput(ctx.request.body);
+    if (isValid) {
+      ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
+      ctx.response.status = 200;
+    } else {
+      ctx.body = errors;
+      ctx.response.status = 400;
+    }
   })
   .post("/register", async (ctx, next) => {
     ctx.body = await ctx.db.collection("users").insert(ctx.request.body);

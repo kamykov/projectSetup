@@ -1,0 +1,17 @@
+@mixin button {
+  background: $primaryStrong;
+  padding: 1rem;
+  color: $textColor;
+  border: none;
+  transition: $transition;
+}
+
+.button {
+  &--primary {
+    @include button;
+
+    &:hover {
+      background: $textColor;
+    }
+  }
+}

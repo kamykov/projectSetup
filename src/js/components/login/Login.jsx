@@ -2,6 +2,8 @@ import React from "react";
 import useForm from "../../hooks/useForm";
 import PropTypes from "prop-types";
 import axios from "axios";
+import "./Login.scss";
+
 const instance = axios.create({
   baseURL: "http://localhost:3000/"
 });
@@ -12,27 +14,34 @@ function Login() {
     //console.log(values);
     instance
       .post("login", values)
-      .then(response => console.log(response))
+      .then(response => {
+        //console.log(response);
+        if (response.status === 200) {
+          console.log("git!!!", response.data);
+        } else {
+          console.log("Fail", response.data);
+        }
+      })
       .catch(error => console.log(error));
   }
   return (
-    <div>
+    <div className="form">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="username"
           value={values.username || ""}
           onChange={handleChange}
-          required
         />
         <input
           type="password"
           name="password"
           value={values.password || ""}
           onChange={handleChange}
-          required
         />
-        <button type="submit">Zaloguj</button>
+        <button className="button--primary" type="submit">
+          Zaloguj
+        </button>
       </form>
     </div>
   );

@@ -18,23 +18,8 @@ app.use(
   })
 );
 
-// app.use(async (ctx, next) => {
-//   ctx.db === ctx.mongo.db("tsDB");
-//   const result = await ctx.db.collection("users").insert({ name: "haha" });
-//   const userId = result.ops[0]._id.toString();
-//   console.log(userId);
-//   ctx.body = await ctx.db
-//     .collection("users")
-//     .find()
-//     .toArray();
-//   ctx.db.collection("users").remove({
-//     _id: mongo.ObjectId(userId)
-//   });
-// });
-
 app.use(json());
 app.use(bodyParser());
-//app.use(async ctx => (ctx.body = { elo: "Hello world" }));
 
 app.use(site.routes());
 
