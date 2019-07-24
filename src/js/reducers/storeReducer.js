@@ -7,6 +7,10 @@ export default (state, action) => {
       return { ...state, isMenuOpen: !state.isMenuOpen };
     case SET_DOTS:
       return { ...state, dots: action.value };
+    case "LOGIN_SUCCESS":
+      return { ...state, notifications: { info: action.message } };
+    case "LOGIN_FAIL":
+      return { ...state, notifications: { errors: action.message } };
     default:
       return state;
   }

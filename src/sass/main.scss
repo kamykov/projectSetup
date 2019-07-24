@@ -1,5 +1,7 @@
 @import "variables.sass";
-@import "tags.scss";
+@import "./utils/index";
+@import "./tags/index";
+@import "./components/index";
 
 * {
   box-sizing: border-box;

@@ -1,11 +1,24 @@
+
+//  COLORS PALLETTE
+
 $primaryColor : #d8450b
 $primaryStrong : #d8450b
+$primaryRed : adjust-color($primaryColor, $red: 20)
 $bgColor : #f9f8f0
 $bgSemiTransparent : rgba(249,248,240, .6)
 $bgDark : #ededed
 $textColor : #533310
+$textColorLight: $bgColor
 $muted : #ddd
+
+
+//  SPACING
+
 $gap : 10px
+
+
+
+//  EFFECTS
 
 $shadow : 0 0 15px rgba(0, 0, 0, 0.8)
 $textShadow : 1px 1px 0 #fdfdfd, 2px 2px 0 rgba(81, 81, 81, 0.5), 0 0 1px #fdfdfd
@@ -17,6 +30,3 @@ $transition: 0.5s all;
 
 
 
-
-=boxShadow($shadow)
-  box-shadow: $shadow

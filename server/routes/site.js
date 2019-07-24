@@ -33,7 +33,8 @@ router
     console.log("login", ctx.request.body);
     const { errors, isValid } = validateLoginInput(ctx.request.body);
     if (isValid) {
-      ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
+      await ctx.db.collection("users").insert(ctx.request.body);
+      //ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
       ctx.response.status = 200;
     } else {
       ctx.body = errors;

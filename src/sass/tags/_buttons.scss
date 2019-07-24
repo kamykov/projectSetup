@@ -1,7 +1,9 @@
 @mixin button {
+  @debug adjust-color(#6b717f, $red: 15);
   background: $primaryStrong;
+  text-transform: uppercase;
   padding: 1rem;
-  color: $textColor;
+  color: $textColorLight;
   border: none;
   transition: $transition;
 }
@@ -11,7 +13,11 @@
     @include button;
 
     &:hover {
-      background: $textColor;
+      background: $primaryRed;
+    }
+
+    &:focus {
+      outline: 1px solid black;
     }
   }
 }

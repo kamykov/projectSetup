@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import useForm from "../../hooks/useForm";
+import { Context } from "../../App";
 import PropTypes from "prop-types";
 import axios from "axios";
-import "./Login.scss";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000/"
 });
 
 function Login() {
+  const {
+    store: { notifications },
+    dispatch
+  } = useContext(Context);
   const { values, handleChange, handleSubmit } = useForm(login);
   function login() {
     //console.log(values);
     instance
       .post("login", values)
       .then(response => {
-        //console.log(response);
         if (response.status === 200) {
+          dispatch({ type: "LOGIN_SUCCESS", message: "Sucess" });
           console.log("git!!!", response.data);
         } else {
+          dispatch({ type: "LOGIN_FAIL", message: "Fail" });
           console.log("Fail", response.data);
         }
       })

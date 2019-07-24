@@ -38,10 +38,6 @@ export default function Menu() {
     );
   });
 
-  function handleClick() {
-    dispatch({ type: "SWITCH_MENU" });
-  }
-
   return (
     <div className={classes.join(" ")}>
       <button className="menu__button" onClick={handleClick} />

@@ -1,0 +1,17 @@
+.notifications {
+  background: $bgDark;
+  position: absolute;
+  width: 50vw;
+  top: 20vh;
+  left: calc(50% - 50vw / 2);
+  z-index: 100;
+  padding: $gap;
+  transform: translateY(-100vh);
+  transition: $transition;
+  text-align: center;
+  @include boxShadow;
+
+  &.show {
+    transform: translateY(0);
+  }
+}

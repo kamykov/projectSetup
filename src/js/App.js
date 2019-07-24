@@ -14,37 +14,30 @@ import Menu from "./components/Menu/Menu.jsx";
 import Page from "./components/Page/Page.jsx";
 import Login from "./components/Login/Login.jsx";
 import Loading from "./components/Loading/Loading.jsx";
+import Notifications from "./components/Notifications/Notifications.jsx";
 import reducer from "./reducers/storeReducer";
 
 if (__BASE___) {
   console.log("__BASE___", __BASE___);
 }
 
-export const Context = React.createContext({
+const initialState = {
   isMenuOpen: false,
-  name: "Kris",
+  notifications: {},
   dots: 12,
   menu: [
     { title: "Home", link: "home" },
     { title: "O mnie", link: "omnie" },
     { title: "Szkolenie", link: "szkolenie" },
-    { title: "Kontakt", link: "kontakt" }
+    { title: "Kontakt", link: "kontakt" },
+    { title: "Login", link: "login" }
   ]
-});
+};
+
+export const Context = React.createContext(initialState);
 
 export default function App() {
-  const [store, dispatch] = useReducer(reducer, {
-    isMenuOpen: false,
-    name: "Kris",
-    dots: 12,
-    menu: [
-      { title: "Home", link: "home" },
-      { title: "O mnie", link: "omnie" },
-      { title: "Szkolenie", link: "szkolenie" },
-      { title: "Kontakt", link: "kontakt" },
-      { title: "Login", link: "login" }
-    ]
-  });
+  const [store, dispatch] = useReducer(reducer, initialState);
 
   const [content, setContent] = useState(undefined);
 
@@ -95,6 +88,7 @@ export default function App() {
             </Switch>
           )}
         </MainWrapper>
+        <Notifications />
       </Context.Provider>
     </Router>
   );

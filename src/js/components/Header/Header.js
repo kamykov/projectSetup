@@ -7,7 +7,7 @@ export default function Header(props) {
   const { dispatch } = useContext(Context);
 
   function handleClick() {
-    dispatch({ type: "SWITCH_MENU", text: "hello" });
+    dispatch({ type: "SWITCH_MENU" });
   }
 
   return (
