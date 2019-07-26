@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../../App";
 
 import { isEmpty } from "../../utils/helpers";
@@ -8,11 +8,20 @@ export default function Notifications() {
     store: { notifications },
     dispatch
   } = useContext(Context);
+
+  let classes = "notifications";
+
+  useEffect(() => {
+    const timer = setTimeout(() => (classes = "notifications show"), 3000);
+    return () => clearTimeout(timer);
+  }, [notifications]);
   let content;
+
+  console.log(classes);
   //const { errors, info, warning } = messages;
-  const classes = isEmpty(notifications)
-    ? "notifications"
-    : "notifications show";
+  // const classes = isEmpty(notifications)
+  //   ? "notifications"
+  //   : "notifications show";
   console.log("notifications", notifications, Object.keys(notifications));
   //const show = Object.keys(messages) ? "show" : "hidden";
   if (!isEmpty(notifications)) {

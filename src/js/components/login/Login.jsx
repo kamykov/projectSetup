@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useForm from "../../hooks/useForm";
 import { Context } from "../../App";
 import PropTypes from "prop-types";
@@ -13,22 +13,41 @@ function Login() {
     store: { notifications },
     dispatch
   } = useContext(Context);
-  const { values, handleChange, handleSubmit } = useForm(login);
-  function login() {
-    //console.log(values);
-    instance
-      .post("login", values)
-      .then(response => {
-        if (response.status === 200) {
-          dispatch({ type: "LOGIN_SUCCESS", message: "Sucess" });
-          console.log("git!!!", response.data);
-        } else {
-          dispatch({ type: "LOGIN_FAIL", message: "Fail" });
-          console.log("Fail", response.data);
-        }
-      })
-      .catch(error => console.log(error));
+  const [type, setType] = useState("login");
+  const { values, handleChange, handleSubmit } = useForm(callback(type));
+
+  const switchType = e => {
+    let newType = type === "login" ? "register" : "login";
+    setType(newType);
+  };
+
+  function callback(type) {
+    return function() {
+      instance
+        .post(type, values)
+        .then(response => {
+          if (response.status === 200) {
+            dispatch({ type: "LOGIN_SUCCESS", message: "Sucess" });
+            console.log("git!!!", response.data);
+          } else {
+            dispatch({ type: "LOGIN_FAIL", message: "Fail" });
+            console.log("Fail", response.data);
+          }
+        })
+        .catch(error => console.log(error));
+    };
   }
+
+  const inputConfirm = type => {
+    return type === "register" ? (
+      <input
+        type="password"
+        name="passwordConfirm"
+        value={values.passwordConfirm || ""}
+        onChange={handleChange}
+      />
+    ) : null;
+  };
   return (
     <div className="form">
       <form onSubmit={handleSubmit}>
@@ -44,8 +63,19 @@ function Login() {
           value={values.password || ""}
           onChange={handleChange}
         />
+        {type === "register" && (
+          <input
+            type="password"
+            name="passwordConfirm"
+            value={values.passwordConfirm || ""}
+            onChange={handleChange}
+          />
+        )}
         <button className="button--primary" type="submit">
-          Zaloguj
+          {type === "register" ? "Rejestracja" : "Login"}
+        </button>
+        <button type="button" onClick={switchType}>
+          {type === "register" ? "Login" : "Rejestracja"}
         </button>
       </form>
     </div>

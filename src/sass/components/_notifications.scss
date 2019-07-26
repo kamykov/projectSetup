@@ -10,6 +10,8 @@
   transition: $transition;
   text-align: center;
   @include boxShadow;
+  animation-name: displayNotification;
+  animation-duration: 4s;
 
   &.show {
     transform: translateY(0);
