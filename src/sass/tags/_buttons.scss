@@ -1,16 +1,31 @@
 @mixin button {
   @debug adjust-color(#6b717f, $red: 15);
-  background: $primaryStrong;
   text-transform: uppercase;
   padding: 1rem;
-  color: $textColorLight;
   border: none;
   transition: $transition;
 }
 
 .button {
+  @include button;
   &--primary {
-    @include button;
+    @extend .button;
+    color: $textColorLight;
+    background: $primaryStrong;
+    &:hover {
+      background: $primaryRed;
+    }
+
+    &:focus {
+      outline: 1px solid black;
+    }
+    &:focus {
+      outline: 1px solid red;
+    }
+  }
+  &--custom {
+    @extend .button;
+    color: $textColor;
 
     &:hover {
       background: $primaryRed;

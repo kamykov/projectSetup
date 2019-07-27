@@ -1,7 +1,10 @@
 const Router = require("koa-router");
 const router = new Router();
 const mongo = require("koa-mongo");
+const mongoose = require("mongoose");
 
+require("../models/User");
+const User = mongoose.model("User");
 const validateLoginInput = require("../validation/login");
 
 router
@@ -30,11 +33,10 @@ router
       .updateOne(documentQuery, valuesToUpdate);
   })
   .post("/login", async (ctx, next) => {
-    console.log("login", ctx.request.body);
     const { errors, isValid } = validateLoginInput(ctx.request.body);
     if (isValid) {
-      await ctx.db.collection("users").insert(ctx.request.body);
-      //ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
+      //await ctx.db.collection("users").insert(ctx.request.body);
+      ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
       ctx.response.status = 200;
     } else {
       ctx.body = errors;
@@ -42,8 +44,21 @@ router
     }
   })
   .post("/register", async (ctx, next) => {
-    ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
-    ctx.response.status = 200;
+    const { username, password, passwordConfirm } = ctx.request.body;
+    console.log(username, password, passwordConfirm);
+    if (password != passwordConfirm) {
+      ctx.body = "passwords error";
+      ctx.response.status = 200;
+    } else {
+      const newUser = new User({
+        username,
+        password,
+        date: new Date().now
+      });
+      newUser.save();
+      //ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
+      ctx.response.status = 200;
+    }
   });
 
 module.exports = router;

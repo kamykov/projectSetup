@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import useForm from "../../hooks/useForm";
 import { Context } from "../../App";
-import PropTypes from "prop-types";
 import axios from "axios";
 
 const instance = axios.create({
@@ -27,10 +26,10 @@ function Login() {
         .post(type, values)
         .then(response => {
           if (response.status === 200) {
-            dispatch({ type: "LOGIN_SUCCESS", message: "Sucess" });
+            dispatch({ type: `${type.toUpperCase()}_SUCCESS` });
             console.log("git!!!", response.data);
           } else {
-            dispatch({ type: "LOGIN_FAIL", message: "Fail" });
+            dispatch({ type: "LOGIN_FAIL" });
             console.log("Fail", response.data);
           }
         })
@@ -38,16 +37,6 @@ function Login() {
     };
   }
 
-  const inputConfirm = type => {
-    return type === "register" ? (
-      <input
-        type="password"
-        name="passwordConfirm"
-        value={values.passwordConfirm || ""}
-        onChange={handleChange}
-      />
-    ) : null;
-  };
   return (
     <div className="form">
       <form onSubmit={handleSubmit}>
@@ -74,7 +63,7 @@ function Login() {
         <button className="button--primary" type="submit">
           {type === "register" ? "Rejestracja" : "Login"}
         </button>
-        <button type="button" onClick={switchType}>
+        <button className="button--custom" type="button" onClick={switchType}>
           {type === "register" ? "Login" : "Rejestracja"}
         </button>
       </form>

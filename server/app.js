@@ -1,11 +1,15 @@
 const Koa = require("Koa");
 const mongo = require("koa-mongo");
+const mongoose = require("mongoose");
+
 const bodyParser = require("koa-bodyparser");
 const json = require("koa-json");
 const cors = require("@koa/cors");
 
 const app = new Koa();
 const site = require("./routes/site");
+
+mongoose.connect("mongodb://localhost/tsDB");
 
 app.use(cors());
 app.use(
@@ -18,9 +22,9 @@ app.use(
   })
 );
 
-app.use(json());
-app.use(bodyParser());
-
-app.use(site.routes());
+app
+  .use(json())
+  .use(bodyParser())
+  .use(site.routes());
 
 app.listen(3000, () => console.log("Server Started ..."));

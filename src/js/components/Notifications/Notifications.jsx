@@ -1,42 +1,31 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../App";
 
 import { isEmpty } from "../../utils/helpers";
 
 export default function Notifications() {
   const {
-    store: { notifications },
-    dispatch
+    store: { notifications }
   } = useContext(Context);
-
-  let classes = "notifications";
+  const [classes, setClasses] = useState(["notifications"]);
 
   useEffect(() => {
-    const timer = setTimeout(() => (classes = "notifications show"), 3000);
-    return () => clearTimeout(timer);
+    if (!isEmpty(notifications)) {
+      setClasses(["notifications", "show"]);
+      const timer = setTimeout(() => setClasses(["notifications"]), 2000);
+      return () => clearTimeout(timer);
+    }
   }, [notifications]);
-  let content;
-
-  console.log(classes);
-  //const { errors, info, warning } = messages;
-  // const classes = isEmpty(notifications)
-  //   ? "notifications"
-  //   : "notifications show";
-  console.log("notifications", notifications, Object.keys(notifications));
-  //const show = Object.keys(messages) ? "show" : "hidden";
-  if (!isEmpty(notifications)) {
-    content = Object.keys(notifications).map((notification, index) => {
-      return (
-        <span key={notification + index} className="message">
-          {notifications[notification]}
-        </span>
-      );
-    });
-  }
 
   return (
-    <div className={classes}>
-      <div>{content}</div>
+    <div className={classes.join(" ")}>
+      <div>
+        {!isEmpty(notifications) && (
+          <span className={`message ${notifications.type}`}>
+            {notifications.message}
+          </span>
+        )}
+      </div>
     </div>
   );
 }
