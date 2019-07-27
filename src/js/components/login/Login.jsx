@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import useForm from "../../hooks/useForm";
+import { FormattedMessage } from "react-intl";
 import { Context } from "../../App";
 import axios from "axios";
 
@@ -62,6 +63,11 @@ function Login() {
         )}
         <button className="button--primary" type="submit">
           {type === "register" ? "Rejestracja" : "Login"}
+          <FormattedMessage
+            id="Auth.Login"
+            defaultMessage={`Zatwierdz {text}`}
+            values={{ text: type === "register" ? "Rejestracja" : "Login" }}
+          />
         </button>
         <button className="button--custom" type="button" onClick={switchType}>
           {type === "register" ? "Login" : "Rejestracja"}

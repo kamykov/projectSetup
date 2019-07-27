@@ -1,6 +1,6 @@
 import React, { useReducer, useContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { IntlProvider, FormattedMessage } from "react-intl";
 import axios from "axios";
 
 const instance = axios.create({
@@ -56,40 +56,42 @@ export default function App() {
   const mainClass = store.isMenuOpen ? "main main--moveout" : "main";
 
   return (
-    <Router>
-      <Context.Provider value={{ store, dispatch }}>
-        <Menu />
-        <MainWrapper>
-          <Header />
-          {content === undefined ? (
-            <Loading />
-          ) : (
-            <Switch>
-              <Route
-                exact
-                path="/szkolenie"
-                render={props => (
-                  <Page {...props} content={content[3]["szkolenia"]} />
-                )}
-              />
-              <Route
-                path="/omnie"
-                render={props => (
-                  <Page {...props} content={content[2]["omnie"]} />
-                )}
-              />
-              <Route path="/login" render={props => <Login />} />
-              <Route
-                path="/"
-                render={props => (
-                  <Page {...props} content={content[0]["home"]} />
-                )}
-              />
-            </Switch>
-          )}
-        </MainWrapper>
-        <Notifications />
-      </Context.Provider>
-    </Router>
+    <IntlProvider locale="en">
+      <Router>
+        <Context.Provider value={{ store, dispatch }}>
+          <Menu />
+          <MainWrapper>
+            <Header />
+            {content === undefined ? (
+              <Loading />
+            ) : (
+              <Switch>
+                <Route
+                  exact
+                  path="/szkolenie"
+                  render={props => (
+                    <Page {...props} content={content[3]["szkolenia"]} />
+                  )}
+                />
+                <Route
+                  path="/omnie"
+                  render={props => (
+                    <Page {...props} content={content[2]["omnie"]} />
+                  )}
+                />
+                <Route path="/login" render={props => <Login />} />
+                <Route
+                  path="/"
+                  render={props => (
+                    <Page {...props} content={content[0]["home"]} />
+                  )}
+                />
+              </Switch>
+            )}
+          </MainWrapper>
+          <Notifications />
+        </Context.Provider>
+      </Router>
+    </IntlProvider>
   );
 }
