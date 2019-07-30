@@ -11,6 +11,8 @@ export default (state, action) => {
   switch (action.type) {
     case SWITCH_MENU:
       return { ...state, isMenuOpen: !state.isMenuOpen };
+    case "SET_LANG":
+      return { ...state, lang: action.lang };
     case SET_DOTS:
       return { ...state, dots: action.value };
     case LOGIN_SUCCESS:

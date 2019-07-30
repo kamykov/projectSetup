@@ -1,25 +1,26 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Context } from "../../App";
+import { injectIntl } from "react-intl";
 import "./Menu.scss";
 
-export default function Menu() {
+function Menu(props) {
   const {
     store: { menu, isMenuOpen },
     dispatch
   } = useContext(Context);
 
   const classes = isMenuOpen ? ["menu", "is-visible"] : ["menu"];
-
+  const { intl } = props;
   function handleClick() {
     dispatch({ type: "SWITCH_MENU" });
   }
 
   const menuItems = menu.map((item, index) => {
     let { title, link } = item;
-    let half = parseInt(title.length / 2);
-    let l = title.slice(0, half);
-    let r = title.slice(half);
+    let translated = intl.formatMessage({ id: title });
+    let half = parseInt(translated.length / 2);
+    let [l, r] = [translated.slice(0, half), translated.slice(half)];
 
     return (
       <li className="menu__element" key={index}>
@@ -31,7 +32,7 @@ export default function Menu() {
           onClick={handleClick}
         >
           <span data-letters-l={l} data-letters-r={r}>
-            {title}
+            {translated}
           </span>
         </NavLink>
       </li>
@@ -45,3 +46,5 @@ export default function Menu() {
     </div>
   );
 }
+
+export default injectIntl(Menu);

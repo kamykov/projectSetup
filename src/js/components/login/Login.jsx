@@ -62,15 +62,16 @@ function Login() {
           />
         )}
         <button className="button--primary" type="submit">
-          {type === "register" ? "Rejestracja" : "Login"}
           <FormattedMessage
-            id="Auth.Login"
-            defaultMessage={`Zatwierdz {text}`}
-            values={{ text: type === "register" ? "Rejestracja" : "Login" }}
+            id={type === "register" ? "Auth.Register" : "Auth.Login"}
+            defaultMessage={`Login`}
           />
         </button>
         <button className="button--custom" type="button" onClick={switchType}>
-          {type === "register" ? "Login" : "Rejestracja"}
+          <FormattedMessage
+            id={type === "register" ? "Auth.Login" : "Auth.Register"}
+            defaultMessage={`Register?`}
+          />
         </button>
       </form>
     </div>

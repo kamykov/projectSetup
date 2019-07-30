@@ -2,13 +2,12 @@ import React, { useReducer, useContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { IntlProvider, FormattedMessage } from "react-intl";
 import axios from "axios";
-
+import translations from "../translations/langs.js";
 const instance = axios.create({
   baseURL: "http://localhost:3000/"
 });
 
 import MainWrapper from "./hoc/MainWrapper/MainWrapper";
-import Box from "./components/Box/Box.jsx";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu.jsx";
 import Page from "./components/Page/Page.jsx";
@@ -22,15 +21,16 @@ if (__BASE___) {
 }
 
 const initialState = {
+  lang: "en",
   isMenuOpen: false,
   notifications: {},
   dots: 12,
   menu: [
-    { title: "Home", link: "home" },
-    { title: "O mnie", link: "omnie" },
-    { title: "Szkolenie", link: "szkolenie" },
-    { title: "Kontakt", link: "kontakt" },
-    { title: "Login", link: "login" }
+    { title: "Menu.Home", link: "home" },
+    { title: "Menu.About", link: "omnie" },
+    { title: "Menu.Training", link: "szkolenie" },
+    { title: "Menu.Contact", link: "kontakt" },
+    { title: "Auth.Login", link: "login" }
   ]
 };
 
@@ -45,7 +45,6 @@ export default function App() {
     instance
       .get("/data")
       .then(res => {
-        console.log("data", res);
         setContent(res.data);
       })
       .catch(error => console.log(error));
@@ -53,12 +52,10 @@ export default function App() {
     return () => {};
   }, []);
 
-  const mainClass = store.isMenuOpen ? "main main--moveout" : "main";
-
   return (
-    <IntlProvider locale="en">
-      <Router>
-        <Context.Provider value={{ store, dispatch }}>
+    <Context.Provider value={{ store, dispatch }}>
+      <IntlProvider locale={store.lang} messages={translations[store.lang]}>
+        <Router>
           <Menu />
           <MainWrapper>
             <Header />
@@ -79,6 +76,12 @@ export default function App() {
                     <Page {...props} content={content[2]["omnie"]} />
                   )}
                 />
+                <Route
+                  path="/kontakt"
+                  render={props => (
+                    <Page {...props} content={content[1]["kontakt"]} />
+                  )}
+                />
                 <Route path="/login" render={props => <Login />} />
                 <Route
                   path="/"
@@ -90,8 +93,8 @@ export default function App() {
             )}
           </MainWrapper>
           <Notifications />
-        </Context.Provider>
-      </Router>
-    </IntlProvider>
+        </Router>
+      </IntlProvider>
+    </Context.Provider>
   );
 }
