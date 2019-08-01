@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { FormattedMessage } from "react-intl";
 import { Context } from "../../App";
 
 import { isEmpty } from "../../utils/helpers";
@@ -8,6 +9,7 @@ export default function Notifications() {
     store: { notifications }
   } = useContext(Context);
   const [classes, setClasses] = useState(["notifications"]);
+  let content = null;
 
   useEffect(() => {
     if (!isEmpty(notifications)) {
@@ -17,15 +19,24 @@ export default function Notifications() {
     }
   }, [notifications]);
 
+  if (!isEmpty(notifications)) {
+    content = notifications.map(notification => (
+      <span
+        className={`message ${notification.type}`}
+        key={notification.message}
+      >
+        <FormattedMessage
+          className={`message ${notification.type}`}
+          id={notification.message}
+          defaultMessage="Notification Message"
+        />
+      </span>
+    ));
+  }
+
   return (
     <div className={classes.join(" ")}>
-      <div>
-        {!isEmpty(notifications) && (
-          <span className={`message ${notifications.type}`}>
-            {notifications.message}
-          </span>
-        )}
-      </div>
+      <div>{content}</div>
     </div>
   );
 }

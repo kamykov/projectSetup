@@ -9,7 +9,10 @@ const cors = require("@koa/cors");
 const app = new Koa();
 const site = require("./routes/site");
 
-mongoose.connect("mongodb://localhost/tsDB");
+mongoose
+  .connect("mongodb://localhost/tsDB")
+  .then(() => console.log("Now connected to MongoDB!"))
+  .catch(err => console.error("Something went wrong", err));
 
 app.use(cors());
 app.use(

@@ -35,29 +35,51 @@ router
   .post("/login", async (ctx, next) => {
     const { errors, isValid } = validateLoginInput(ctx.request.body);
     if (isValid) {
-      //await ctx.db.collection("users").insert(ctx.request.body);
-      ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
+      ctx.body = [{ type: "warnning", message: "Auth.Login.Success" }];
       ctx.response.status = 200;
     } else {
-      ctx.body = errors;
-      ctx.response.status = 400;
+      console.log(errors);
+      ctx.body = Object.keys(errors).reduce((set, error) => {
+        return [...set, { type: "error", message: errors[error] }];
+      }, []);
+      ctx.response.status = 201;
     }
   })
   .post("/register", async (ctx, next) => {
+    //ctx.respond = false;
+    //const { errors, isValid } = validateLoginInput(ctx.request.body);
     const { username, password, passwordConfirm } = ctx.request.body;
     console.log(username, password, passwordConfirm);
-    if (password != passwordConfirm) {
-      ctx.body = "passwords error";
+    // if (!isValid) {
+    //   ctx.body = Object.keys(errors).reduce((set, error) => {
+    //     return [...set, { type: "error", message: errors[error] }];
+    //   }, []);
+    //   ctx.body.push({
+    //     type: "error",
+    //     message: "Auth.Register.Passwords.Error"
+    //   });
+    //   ctx.response.status = 200;
+    // } else {
+
+    //ctx.redirect("/login");
+
+    let user = await User.findOne({
+      username: username
+    });
+
+    if (user) {
+      ctx.body = [{ type: "error", message: "Auth.Register.Error.UserExists" }];
       ctx.response.status = 200;
     } else {
-      const newUser = new User({
+      const user = new User({
         username,
         password,
-        date: new Date().now
+        date: new Date()
       });
-      newUser.save();
-      //ctx.body = await ctx.db.collection("users").insert(ctx.request.body);
+      await user.save();
+      ctx.body = [{ type: "success", message: "Auth.Register.Succes" }];
       ctx.response.status = 200;
+      next();
     }
   });
 

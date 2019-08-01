@@ -16,6 +16,10 @@ $success: #39ff5a; //#63e205
 $error: #e20505;
 $warnning: #d6b719;
 
+//  SIZES
+
+$normal: 16px
+
 
 //  SPACING
 
@@ -30,8 +34,32 @@ $textShadow : 1px 1px 0 #fdfdfd, 2px 2px 0 rgba(81, 81, 81, 0.5), 0 0 1px #fdfdf
 $transition: 0.5s all;
 
 
+//  MAPS 
+
+$types: ("success": $success, "error": $error, "warnning" :$warnning)
+
+@mixin message($property, $color, $selectors) 
+  @for $i from 0 to length($selectors)
+    #{nth($selectors, $i + 1)}
+      #{$property}: $color
+
+  
 
 
+@function get-color($type) 
+  @return map-get($types, $type)
+
+@function set-border($color, $type:solid, $width:3px) 
+  @return $width $type $color
+
+@function remove-where($list) 
+  $new-list: ();
+  $separator: list-separator($list);
+  @each $element in $list 
+    $new-list: append($new-list, $element, $separator:$separator)
+    
+  
+  @return $new-list
 
 
 

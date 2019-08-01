@@ -8,13 +8,13 @@ module.exports = function validateLoginInput(data) {
   data.password = !isEmpty(data.password) ? data.password : "";
 
   if (Validator.isEmpty(data.username)) {
-    errors.username = "Username field is required";
+    errors.username = "Validation.Username.Reqired";
   }
   if (!Validator.isLength(data.username, { min: 3, max: 64 })) {
-    errors.username = "Username should be at least 3 letter long";
+    errors.username = "Validation.Username.Length";
   }
   if (Validator.isEmpty(data.password)) {
-    errors.password = "Password field is required";
+    errors.password = "Validation.Password.Required";
   }
 
   return {

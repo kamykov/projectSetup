@@ -1,6 +1,8 @@
 import {
   SWITCH_MENU,
   SET_DOTS,
+  SEND_NOTIFICATION,
+  SET_LANG,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   REGISTER_SUCCESS,
@@ -8,32 +10,38 @@ import {
 } from "../actions";
 
 export default (state, action) => {
-  switch (action.type) {
+  console.log(action);
+  switch (action.type.substring(0, action.type.indexOf(":")) || action.type) {
     case SWITCH_MENU:
       return { ...state, isMenuOpen: !state.isMenuOpen };
-    case "SET_LANG":
+    case SET_LANG:
       return { ...state, lang: action.lang };
     case SET_DOTS:
       return { ...state, dots: action.value };
+    case SEND_NOTIFICATION:
+      return {
+        ...state,
+        notifications: action.notifications
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        notifications: { type: "success", message: "Zalogowano pomyślnie" }
+        notifications: action.notifications
       };
     case LOGIN_FAIL:
       return {
         ...state,
-        notifications: { type: "error", message: "Błąd logowania" }
+        notifications: action.notifications
       };
     case REGISTER_SUCCESS:
       return {
         ...state,
-        notifications: { type: "success", message: "Udana rejestracja" }
+        notifications: [{ type: "success", message: "Udana rejestracja" }]
       };
     case REGISTER_FAIL:
       return {
         ...state,
-        notifications: { type: "error", message: "Lipna rejestracja" }
+        notifications: [{ type: "error", message: "Lipna rejestracja" }]
       };
     default:
       return state;

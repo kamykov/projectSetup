@@ -19,11 +19,15 @@
     text-align: center;
     justify-content: center;
     padding: $gap;
-    &.success {
-      border-left: 2em solid $success;
+
+    @each $type, $color in $types {
+      &.#{$type} {
+        border-left: 2em solid $color;
+      }
     }
-    &.error {
-      background: red;
-    }
+    //@include message("background", #450056, ".error" ".success");
+    @debug message("background", #450056, "message.error" "message.lipa");
+    @debug get-color("success");
+    @debug map-get($types, "success");
   }
 }

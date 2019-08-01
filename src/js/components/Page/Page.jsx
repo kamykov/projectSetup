@@ -1,4 +1,5 @@
 import React from "react";
+import { injectIntl, FormattedMessage } from "react-intl";
 import Interweave, { Markup } from "interweave";
 import Wrapper from "../../hoc/Wrapper/Wrapper";
 import Headline from "../Headline/Headline";
@@ -8,12 +9,15 @@ import Logo from "../../../img/logo.svg";
 
 function Page(props) {
   const { title, subtitle, headline, content } = props.content;
+  const { intl } = props;
+  console.log(title);
+  const titleTranslation = intl.formatMessage({ id: title });
   return (
     <div className="page">
       <div className="page__content">
         <Logo />
         <h1 className="page__title">
-          <Headline>{title}</Headline>
+          <Headline>{titleTranslation}</Headline>
         </h1>
         <h2 className="page__subtitle">
           {subtitle && <Headline>{subtitle}</Headline>}
@@ -29,4 +33,4 @@ function Page(props) {
   );
 }
 
-export default Page;
+export default injectIntl(Page);

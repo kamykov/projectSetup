@@ -4,6 +4,9 @@
   padding: 1rem;
   border: none;
   transition: $transition;
+  &:disabled {
+    color: #eee;
+  }
 }
 
 .button {
