@@ -12,6 +12,8 @@ $textColorLight: $bgColor
 $muted : #ddd
 
 
+// TYPES [colors]
+
 $success: #39ff5a; //#63e205
 $error: #e20505;
 $warnning: #d6b719;
@@ -20,11 +22,16 @@ $warnning: #d6b719;
 
 $normal: 16px
 
-
 //  SPACING
 
 $gap : 10px
 
+
+// MEDIA QUERIES
+
+$small: 500px
+$tablet: 768px
+$desktop: 1280px  
 
 
 //  EFFECTS
@@ -38,13 +45,20 @@ $transition: 0.5s all;
 
 $types: ("success": $success, "error": $error, "warnning" :$warnning)
 
+//  MIXINS
+  
+
 @mixin message($property, $color, $selectors) 
   @for $i from 0 to length($selectors)
     #{nth($selectors, $i + 1)}
       #{$property}: $color
 
-  
 
+@mixin mq($size) 
+  @media only screen and (max-width: $size)
+    @content
+
+//  FUNCTIONS
 
 @function get-color($type) 
   @return map-get($types, $type)

@@ -3,6 +3,10 @@
   margin: auto;
   padding: 2rem;
   background: $bgSemiTransparent;
+
+  @include mq($small) {
+    width: 90%;
+  }
 }
 
 form {

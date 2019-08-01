@@ -21,6 +21,7 @@
   "author": "Think Studio",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "formik": "^1.5.8",
