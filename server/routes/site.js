@@ -3,9 +3,10 @@ const router = new Router();
 const mongo = require("koa-mongo");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const passport = require("koa-passport");
 
-require("../models/User");
-const User = mongoose.model("User");
+//const User = require("../models/User");
+// const User = mongoose.model("User");
 const validateLoginInput = require("../validation/login");
 const validateRegisterInput = require("../validation/register");
 
@@ -22,6 +23,9 @@ router
       .find()
       .toArray();
   })
+  .get("/user/status", async ctx => {
+    ctx.body = [{ type: "success", message: "Auth.Login.Success" }];
+  })
   .get("/user/:id", async ctx => {
     ctx.body = await ctx.db
       .collection("users")
@@ -35,10 +39,20 @@ router
       .updateOne(documentQuery, valuesToUpdate);
   })
   .post("/login", async (ctx, next) => {
-    const { errors, isValid } = validateLoginInput(ctx.request.body);
+    const { errors, isValid, data: user } = validateLoginInput(
+      ctx.request.body
+    );
     if (isValid) {
-      ctx.body = [{ type: "success", message: "Auth.Login.Success" }];
-      ctx.response.status = 200;
+      return passport.authenticate("local", (err, user, info, status) => {
+        console.log(user, info, status);
+        if (user) {
+          ctx.login(user);
+          ctx.redirect("/user/status");
+        } else {
+          ctx.status = 206;
+          ctx.body = [{ type: "error", message: "Auth.Login.Fail" }];
+        }
+      })(ctx);
     } else {
       ctx.body = Object.keys(errors).reduce((set, error) => {
         return [...set, { type: "error", message: errors[error] }];

@@ -83,6 +83,7 @@ export default function App() {
                   )}
                 />
                 <Route path="/login" render={props => <Login />} />
+                <Route path="/user/status" render={props => <Login />} />
                 <Route
                   path="/"
                   render={props => (

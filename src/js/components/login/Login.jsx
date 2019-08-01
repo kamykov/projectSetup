@@ -105,7 +105,9 @@ function Login(props) {
                 name="passwordConfirm"
                 value={values.passwordConfirm || ""}
                 onChange={handleChange}
-                placeholder={intl.formatMessage({ id: "Auth.Password2.Placeholder" })}
+                placeholder={intl.formatMessage({
+                  id: "Auth.Password2.Placeholder"
+                })}
               />
             )}
             {errors.passwordConfirm &&

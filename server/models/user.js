@@ -6,4 +6,4 @@ const userSchema = new mongoose.Schema({
   date: Date
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = User = mongoose.model("User", userSchema);
