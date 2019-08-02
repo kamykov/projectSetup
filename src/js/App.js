@@ -11,6 +11,7 @@ import MainWrapper from "./hoc/MainWrapper/MainWrapper";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu.jsx";
 import Page from "./components/Page/Page.jsx";
+import PageSlider from "./components/PageSlider/PageSlider.jsx";
 import Profile from "./components/Profile/Profile.jsx";
 import Login from "./components/Login/Login.jsx";
 import Loading from "./components/Loading/Loading.jsx";
@@ -29,9 +30,9 @@ const initialState = {
   menu: [
     { title: "Menu.Home", link: "home" },
     { title: "Menu.About", link: "omnie" },
-    { title: "Menu.Training", link: "szkolenie" },
-    { title: "Menu.Contact", link: "kontakt" },
-    { title: "Auth.Login", link: "login" }
+    { title: "Menu.Training", link: "szkolenia" },
+    { title: "Menu.Contact", link: "kontakt" }
+    // { title: "Auth.Login", link: "login" }
   ]
 };
 
@@ -66,7 +67,7 @@ export default function App() {
               <Switch>
                 <Route
                   exact
-                  path="/szkolenie"
+                  path="/szkolenia"
                   render={props => (
                     <Page {...props} content={content[3]["szkolenia"]} />
                   )}
@@ -82,6 +83,10 @@ export default function App() {
                   render={props => (
                     <Page {...props} content={content[1]["kontakt"]} />
                   )}
+                />
+                <Route
+                  path="/slider"
+                  render={props => <PageSlider {...props} content={content} />}
                 />
                 <Route path="/login" render={props => <Login />} />
                 <Route path="/user/status" render={props => <Profile />} />

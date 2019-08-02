@@ -1,33 +1,46 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { Context } from "../../App";
+import { getCurrentIndex } from "../../utils/helpers";
 
 function WingNav(props) {
   const {
     store: { menu }
   } = useContext(Context);
-  const [current, setCurrent] = useState(0);
 
-  const pathname = props.location.pathname;
+  const [current, setCurrent] = useState(1);
+  const { pathname } = props.location;
   const links = menu.map(item => item.link);
+  const [backClasses, forwardClasses] = [
+    ["button-wingnav", "back"],
+    ["button-wingnav", "forward"]
+  ];
+  current === 0 && backClasses.push("hidden");
 
-  const currentIndex = links.indexOf(pathname.substring(1));
+  useEffect(() => {
+    setCurrent(getCurrentIndex(links, pathname));
+  }, []);
 
-  console.log(props, current, pathname, menu, links, currentIndex);
   const goToPage = e => {
-    console.dir(e.target.classList);
-
-    props.history.push(`/${links[currentIndex + 1]}`);
+    const isBack = e.target.classList.contains("back");
+    const next = (isBack ? current - 1 : current + 1) % links.length;
+    //props.history.push(`/${links[next]}`);
+    props.history.push(`/slider#${links[next]}`);
+    setCurrent(next);
   };
 
   return (
     <div className="wingnav">
-      <button type="button" className="button-wingnav back" onClick={goToPage}>
+      <button
+        type="button"
+        className={backClasses.join(" ")}
+        onClick={goToPage}
+      >
         {`<`}
       </button>
       <button
         type="button"
-        className="button-wingnav forward"
+        className={forwardClasses.join(" ")}
         onClick={goToPage}
       >
         {`>`}

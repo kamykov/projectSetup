@@ -124,6 +124,9 @@
         transform: rotate(-135deg);
       }
     }
+    &.hidden {
+      visibility: hidden;
+    }
   }
   @keyframes scrollTextRight {
     0% {

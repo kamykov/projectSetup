@@ -1,0 +1,63 @@
+@import "../../../sass/variables.sass";
+
+.page-slider {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  margin: 10vh auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  text-align: center;
+  align-items: center;
+
+  &__content {
+    display: flex;
+    margin-left: -100vw;
+  }
+  &__page {
+    transition: $transition;
+    width: 100vw;
+    padding: 0 10vw;
+    @include mq($small) {
+      padding: 0 20vw;
+    }
+    &.active {
+      order: 1;
+    }
+    &.previous {
+      order: -1;
+      //transform: scale(0.5);
+      transform: translateX(-100vw);
+      //margin-left: 10em;
+    }
+    &.next {
+      order: 2;
+      //transform: scale(0.5);
+      transform: translateX(100vw);
+      //margin-left: 10em;
+    }
+  }
+
+  & > button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+  }
+}
+
+.page__title {
+  text-shadow: $textShadow;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #666;
+  text-align: center;
+  background-color: $bgSemiTransparent;
+}
+
+.page__subtitle {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: $primaryColor;
+}
