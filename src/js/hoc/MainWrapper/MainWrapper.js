@@ -5,6 +5,7 @@ import { SET_DOTS } from "../../actions/";
 import { Context } from "../../App";
 import Canvas from "./../../hoc/Canvas/Canvas";
 import Panel from "../../components/Panel/Panel";
+import WingNav from "../../components/WingNav/WingNav.jsx";
 
 function MainWrapper(props) {
   const {
@@ -22,6 +23,7 @@ function MainWrapper(props) {
       {props.children}
       <Canvas dots={dots} />
       <Panel dots={dots} min="3" max="30" onChange={handlerOnChange} />
+      <WingNav />
     </main>
   );
 }

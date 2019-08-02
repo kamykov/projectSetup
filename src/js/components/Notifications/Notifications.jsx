@@ -26,7 +26,6 @@ export default function Notifications() {
         key={notification.message}
       >
         <FormattedMessage
-          className={`message ${notification.type}`}
           id={notification.message}
           defaultMessage="Notification Message"
         />
@@ -34,9 +33,5 @@ export default function Notifications() {
     ));
   }
 
-  return (
-    <div className={classes.join(" ")}>
-      <div>{content}</div>
-    </div>
-  );
+  return <div className={classes.join(" ")}>{content}</div>;
 }

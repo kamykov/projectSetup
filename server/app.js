@@ -47,12 +47,19 @@ app.use(passport.session());
 //Simple request time logger
 app.use(function*(next) {
   console.log("A new request received at " + Date.now());
-  //console.log("ctx " + ctx.request);
+  console.log(this);
 
   //This function call is very important. It tells that more processing is
   //required for the current request and is in the next middleware function/route handler.
   yield next;
 });
 app.use(json()).use(site.routes());
+
+app.use(function*(next) {
+  if (404 != this.status) return;
+  console.log("Upsss", this.status);
+  this.redirect("/not_found");
+  yield next;
+});
 
 app.listen(3000, () => console.log("Server Started ..."));

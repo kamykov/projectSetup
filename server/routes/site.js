@@ -18,12 +18,17 @@ router
       .toArray();
   })
   .get("/users", async ctx => {
+    ctx.response.status = 202;
     ctx.body = await ctx.db
       .collection("users")
       .find()
       .toArray();
   })
+  .get("/not_found", async ctx => {
+    ctx.body = [{ type: "warnning", message: "URL.Not.Found" }];
+  })
   .get("/user/status", async ctx => {
+    console.log("back / /user/status");
     ctx.body = [{ type: "success", message: "Auth.Login.Success" }];
   })
   .get("/user/:id", async ctx => {
@@ -47,7 +52,8 @@ router
         console.log(user, info, status);
         if (user) {
           ctx.login(user);
-          ctx.redirect("/user/status");
+          ctx.body = [{ type: "success", message: "Auth.Login.Success" }];
+          ctx.response.status = 202;
         } else {
           ctx.status = 206;
           ctx.body = [{ type: "error", message: "Auth.Login.Fail" }];

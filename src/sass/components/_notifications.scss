@@ -1,7 +1,8 @@
 .notifications {
-  background: $bgDark;
+  background: $bgColor;
   position: absolute;
   width: 50vw;
+
   top: 20vh;
   left: calc(50% - 50vw / 2);
   z-index: 100;
@@ -10,6 +11,9 @@
   @include boxShadow;
   animation-name: displayNotification;
   animation-duration: 4s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
   &.show {
     transform: translateY(0);
@@ -17,8 +21,12 @@
   .message {
     display: flex;
     text-align: center;
-    justify-content: center;
+    align-items: center;
     padding: $gap;
+
+    &:not(:last-child) {
+      border-bottom: 5px solid $bgDark;
+    }
 
     @each $type, $color in $types {
       &.#{$type} {

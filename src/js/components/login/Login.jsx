@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import useForm from "../../hooks/useForm";
 import { injectIntl, FormattedMessage } from "react-intl";
+import { withRouter } from "react-router-dom";
 import { Formik } from "formik";
 import { Context } from "../../App";
-import { SEND_NOTIFICATION } from "../../actions";
+import { SEND_NOTIFICATION, USER_LOGIN_SUCCES } from "../../actions";
 import axios from "axios";
 
 const instance = axios.create({
@@ -15,6 +15,7 @@ function Login(props) {
     store: { notifications },
     dispatch
   } = useContext(Context);
+  console.log(props);
   const [type, setType] = useState("login");
   const {
     intl // Injected by `injectIntl`
@@ -31,11 +32,18 @@ function Login(props) {
         .then(response => {
           dispatch({
             type:
-              response.status === 200
+              response.status < 204
                 ? `${SEND_NOTIFICATION}:${type.toUpperCase()}_SUCCESS`
                 : `${SEND_NOTIFICATION}:${type.toUpperCase()}_FAIL`,
             notifications: response.data
           });
+          if (response.status === 202) {
+            dispatch({
+              type: USER_LOGIN_SUCCES,
+              users: response.data
+            });
+            props.history.push("/user/status");
+          }
         })
         .catch(error => console.log(error));
     };
@@ -139,4 +147,4 @@ function Login(props) {
 
 Login.propTypes = {};
 
-export default injectIntl(Login);
+export default injectIntl(withRouter(Login));

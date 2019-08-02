@@ -1,9 +1,12 @@
 @mixin button {
   @debug adjust-color(#6b717f, $red: 15);
-  text-transform: uppercase;
+  color: $textColor;
+  position: relative;
   padding: 1rem;
   border: none;
+  outline: none;
   transition: $transition;
+  text-transform: uppercase;
   &:disabled {
     color: #eee;
   }
@@ -28,14 +31,130 @@
   }
   &--custom {
     @extend .button;
-    color: $textColor;
 
     &:hover {
-      background: $primaryRed;
+      background: adjust-color($bgColor, $red: -95, $blue: 20);
     }
 
     &:focus {
       outline: 1px solid black;
+    }
+  }
+  &--nav {
+    @extend .button;
+    background: none;
+    line-height: 50px;
+
+    &:hover {
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: calc(50% - 40px / 2);
+        left: calc(50% - 40px / 2);
+        width: 40px;
+        height: 40px;
+        //background: adjust-color($bgColor, $red: -95, $blue: 20);
+        background: none;
+        box-shadow: $shadowLight;
+        transform: skewY(5deg);
+        transform: rotate(50deg);
+      }
+    }
+
+    &:focus-within {
+      outline: none;
+      &::after {
+        @include pseudoElement(30px);
+        background: none;
+        box-shadow: $shadowLight;
+        transform: skewY(15deg);
+        transform: rotate(10deg);
+      }
+    }
+    &:first-child:focus:after {
+      transform: rotate(-10deg);
+    }
+    &.active {
+      &::after {
+        @include pseudoElement(40px);
+        background: none;
+        box-shadow: $shadowLight;
+        transform: skewY(15deg);
+        transform: rotate(10deg);
+      }
+    }
+  }
+  &-wingnav {
+    @extend .button;
+    background: $bgDark;
+    width: 80px;
+    height: 70px;
+    padding: 1em 2em;
+    overflow: hidden;
+    background: none;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-name: scrollTextRight;
+    animation-timing-function: ease;
+    animation-direction: alternate;
+    font-weight: 300;
+    font-size: 1em;
+    &:hover {
+      animation-play-state: paused;
+      &:before {
+        background: linear-gradient(
+          45deg,
+          rgba(249, 248, 240, 1) 0%,
+          rgba(249, 248, 240, 1) 51%,
+          rgba(201, 200, 193, 1) 100%
+        );
+        box-shadow: 2px -2px 2px 1px rgba(0, 0, 0, 0.2);
+      }
+    }
+    &:before {
+      @include pseudoElement(40px);
+      box-shadow: 5px -5px 5px 1px rgba(0, 0, 0, 0.3);
+      transform: rotate(45deg);
+      background: none;
+    }
+    &.back {
+      animation-name: scrollTextLeft;
+      &:before {
+        transform: rotate(-135deg);
+      }
+    }
+  }
+  @keyframes scrollTextRight {
+    0% {
+      text-indent: 0px;
+      color: $bgColor;
+    }
+    30% {
+      text-indent: 5px;
+      color: inherit;
+    }
+    70% {
+      text-indent: 10px;
+    }
+    100% {
+      text-indent: 15px;
+    }
+  }
+  @keyframes scrollTextLeft {
+    0% {
+      text-indent: 0px;
+      color: $bgColor;
+    }
+    30% {
+      text-indent: -5px;
+      color: inherit;
+    }
+    70% {
+      text-indent: -10px;
+    }
+    100% {
+      text-indent: -15px;
     }
   }
 }

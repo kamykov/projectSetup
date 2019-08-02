@@ -1,5 +1,13 @@
 input {
+  border: 1px solid $bgDark;
+  text-align: center;
+
   &::placeholder {
     font-size: $normal;
+  }
+  &:focus {
+    outline: none;
+    // outline-offset: -2px;
+    box-shadow: $shadowLight;
   }
 }

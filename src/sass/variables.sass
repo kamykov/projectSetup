@@ -14,9 +14,10 @@ $muted : #ddd
 
 // TYPES [colors]
 
-$success: #39ff5a; //#63e205
-$error: #e20505;
-$warnning: #d6b719;
+$success: #39ff5a //#63e205
+$error: #e20505
+$warnning: #d6b719
+$focus: #3cc3ab
 
 //  SIZES
 
@@ -37,13 +38,14 @@ $desktop: 1280px
 //  EFFECTS
 
 $shadow : 0 0 15px rgba(0, 0, 0, 0.8)
+$shadowLight : 2px 2px 5px rgba(0, 0, 0, 0.5)
 $textShadow : 1px 1px 0 #fdfdfd, 2px 2px 0 rgba(81, 81, 81, 0.5), 0 0 1px #fdfdfd
 $transition: 0.5s all;
 
 
 //  MAPS 
 
-$types: ("success": $success, "error": $error, "warnning" :$warnning)
+$types: ("success": $success, "error": $error, "warnning" :$warnning, "focus": $focus)
 
 //  MIXINS
   
@@ -57,6 +59,17 @@ $types: ("success": $success, "error": $error, "warnning" :$warnning)
 @mixin mq($size) 
   @media only screen and (max-width: $size)
     @content
+
+
+@mixin pseudoElement($size) 
+  content: ""
+  display: block
+  position: absolute
+  top: calc(50% - #{$size} / 2 )
+  left: calc(50% - #{$size} / 2)
+  width: #{$size}
+  height: #{$size}
+
 
 //  FUNCTIONS
 

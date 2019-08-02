@@ -6,7 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  USER_LOGIN_SUCCES
 } from "../actions";
 
 export default (state, action) => {
@@ -42,6 +43,11 @@ export default (state, action) => {
       return {
         ...state,
         notifications: [{ type: "error", message: "Lipna rejestracja" }]
+      };
+    case USER_LOGIN_SUCCES:
+      return {
+        ...state,
+        users: action.users
       };
     default:
       return state;

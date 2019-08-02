@@ -11,6 +11,7 @@ import MainWrapper from "./hoc/MainWrapper/MainWrapper";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu.jsx";
 import Page from "./components/Page/Page.jsx";
+import Profile from "./components/Profile/Profile.jsx";
 import Login from "./components/Login/Login.jsx";
 import Loading from "./components/Loading/Loading.jsx";
 import Notifications from "./components/Notifications/Notifications.jsx";
@@ -83,7 +84,8 @@ export default function App() {
                   )}
                 />
                 <Route path="/login" render={props => <Login />} />
-                <Route path="/user/status" render={props => <Login />} />
+                <Route path="/user/status" render={props => <Profile />} />
+                <Route path="not_found" render={<h1>"OK"</h1>} />
                 <Route
                   path="/"
                   render={props => (
