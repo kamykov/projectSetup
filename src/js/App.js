@@ -68,21 +68,15 @@ export default function App() {
                 <Route
                   exact
                   path="/szkolenia"
-                  render={props => (
-                    <Page {...props} content={content[3]["szkolenia"]} />
-                  )}
+                  render={props => <Page {...props} content={content[3]} />}
                 />
                 <Route
                   path="/omnie"
-                  render={props => (
-                    <Page {...props} content={content[2]["omnie"]} />
-                  )}
+                  render={props => <Page {...props} content={content[2]} />}
                 />
                 <Route
                   path="/kontakt"
-                  render={props => (
-                    <Page {...props} content={content[1]["kontakt"]} />
-                  )}
+                  render={props => <Page {...props} content={content[1]} />}
                 />
                 <Route
                   path="/slider"
@@ -93,9 +87,7 @@ export default function App() {
                 <Route path="not_found" render={props => <h1>"OK"</h1>} />
                 <Route
                   path="/"
-                  render={props => (
-                    <Page {...props} content={content[0]["home"]} />
-                  )}
+                  render={props => <Page {...props} content={content[0]} />}
                 />
               </Switch>
             )}

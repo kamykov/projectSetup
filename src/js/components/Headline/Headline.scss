@@ -3,6 +3,12 @@
 .headline {
   font-size: 2rem;
   color: inherit;
+  @include mq($small) {
+    font-size: 1.4rem;
+  }
+  @include mq-min($desktop) {
+    font-size: 4.4rem;
+  }
 }
 
 .letter {

@@ -20,7 +20,7 @@
     width: 100vw;
     padding: 0 10vw;
     @include mq($small) {
-      padding: 0 20vw;
+      padding: 0 10vw;
     }
     &.active {
       order: 1;

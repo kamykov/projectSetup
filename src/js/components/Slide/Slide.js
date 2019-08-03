@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Slide.scss";
 
-function Slide(props) {
-  const { children, delay, type } = props;
-
+function Slide({ children, delay }) {
   const [classes, setClasses] = useState("slide");
 
   useEffect(() => {

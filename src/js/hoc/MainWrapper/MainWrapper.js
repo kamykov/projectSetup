@@ -9,8 +9,7 @@ import WingNav from "../../components/WingNav/WingNav.jsx";
 
 function MainWrapper(props) {
   const {
-    store: { menu, isMenuOpen, dots },
-
+    store: { isMenuOpen, dots },
     dispatch
   } = useContext(Context);
 
