@@ -24,26 +24,6 @@ export default (state, action) => {
         ...state,
         notifications: action.notifications
       };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        notifications: action.notifications
-      };
-    case LOGIN_FAIL:
-      return {
-        ...state,
-        notifications: action.notifications
-      };
-    case REGISTER_SUCCESS:
-      return {
-        ...state,
-        notifications: [{ type: "success", message: "Udana rejestracja" }]
-      };
-    case REGISTER_FAIL:
-      return {
-        ...state,
-        notifications: [{ type: "error", message: "Lipna rejestracja" }]
-      };
     case USER_LOGIN_SUCCES:
       return {
         ...state,

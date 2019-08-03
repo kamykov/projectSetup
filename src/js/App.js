@@ -90,7 +90,7 @@ export default function App() {
                 />
                 <Route path="/login" render={props => <Login />} />
                 <Route path="/user/status" render={props => <Profile />} />
-                <Route path="not_found" render={<h1>"OK"</h1>} />
+                <Route path="not_found" render={props => <h1>"OK"</h1>} />
                 <Route
                   path="/"
                   render={props => (

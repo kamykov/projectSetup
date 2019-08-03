@@ -21,7 +21,6 @@ function PageSlider(props) {
     let content = page[Object.keys(page).pop()];
     content.title = Object.keys(page).pop();
     return content;
-    //return keys.map(key => page[key]);
   });
   const { intl } = props;
 
@@ -38,16 +37,13 @@ function PageSlider(props) {
     }, []);
   console.log(props, pages, menu, sorted, hash, current);
 
-  //const { intl } = props;
-
   let content = sorted.map((page, index) => {
     let classes = [];
     const { title, subtitle, headline, content, img } = page;
     console.log(current, index);
     if (index === current) classes.push("active");
-    if (index - 1 === current || (index === 0 && current === sorted.length - 1))
-      classes.push("next");
-    if (index + 1 === current || (current === 0 && index === sorted.length - 1))
+    if (index === (current + 1) % sorted.length) classes.push("next");
+    if (index === (current === 0 ? sorted.length - 1 : current - 1))
       classes.push("previous");
     let titleTranslation = intl.formatMessage({ id: title });
     return (

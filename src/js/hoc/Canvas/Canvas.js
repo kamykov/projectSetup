@@ -13,10 +13,14 @@ import "./Canvas.scss";
 export default function Canvas(props) {
   const {
     color = "rgba(255,0,0, .5)",
-    stroke = "rgba(200,200,200, .5)",
-    dots = props.dots || 12
+    stroke = "rgba(200,200,200, .5)"
+    //dots = props.dots || 12
   } = props;
   let ctx;
+  const {
+    store: { dots }
+  } = useContext(Context);
+  console.log(dots);
 
   const [size, setSize] = useState({
     width: window.innerWidth,
@@ -24,9 +28,6 @@ export default function Canvas(props) {
   });
   const allPoints = lib.generate(100, lib.dotInDiv, size, 2, 2, color);
   const [points, setPoints] = useState(allPoints.slice(0, 12));
-  const {
-    store: { isMenuOpen }
-  } = useContext(Context);
   const wrapperRef = useRef();
   const rAF = useRef();
   const canvasRef = useRef();
@@ -42,9 +43,10 @@ export default function Canvas(props) {
     let newPoints = allPoints.slice(0, dots);
     setPoints(newPoints);
     updateAnimationState();
-    console.log("useLayoutEffect", points, size, canvasRef, ctx, rAF);
+    console.log("useLayoutEffect", points.length, size, canvasRef, ctx, rAF);
     return () => {
-      cancelAnimationFrame(rAF);
+      setPoints(null);
+      cancelAnimationFrame(rAF.current);
     };
   }, [dots]);
 
