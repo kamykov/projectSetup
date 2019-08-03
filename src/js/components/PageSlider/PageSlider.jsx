@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
-import { injectIntl, FormattedMessage } from "react-intl";
+import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
-import Interweave, { Markup } from "interweave";
+import { Markup } from "interweave";
 import { Context } from "../../App";
-import Wrapper from "../../hoc/Wrapper/Wrapper";
 import Headline from "../Headline/Headline";
 import Slide from "../Slide/Slide";
 import "./PageSlider.scss";
 import Logo from "../../../img/logo.svg";
-import storeReducer from "../../reducers/storeReducer";
 
 function PageSlider({ content, location: { hash }, intl }) {
   const {

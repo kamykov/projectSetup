@@ -2,7 +2,6 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import Panel from "./Panel";
-import { JestEnvironment } from "@jest/environment";
 
 // import Context from "../../App";
 // const { dispatch } = useContext(Context);

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Wrapper from "../Wrapper/Wrapper";
 import "./MainWrapper.scss";
 import { SET_DOTS } from "../../actions/";
 import { Context } from "../../App";
@@ -7,7 +6,7 @@ import Canvas from "./../../hoc/Canvas/Canvas";
 import Panel from "../../components/Panel/Panel";
 import WingNav from "../../components/WingNav/WingNav.jsx";
 
-function MainWrapper(props) {
+function MainWrapper({ children }) {
   const {
     store: { isMenuOpen, dots },
     dispatch
@@ -19,7 +18,7 @@ function MainWrapper(props) {
   const classes = isMenuOpen ? ["main main--moveout"] : ["main"];
   return (
     <main className={classes}>
-      {props.children}
+      {children}
       <Canvas dots={dots} />
       <Panel dots={dots} min="3" max="30" onChange={handlerOnChange} />
       <WingNav />

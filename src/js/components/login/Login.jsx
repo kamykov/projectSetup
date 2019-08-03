@@ -10,20 +10,10 @@ const instance = axios.create({
   baseURL: "http://localhost:3000/"
 });
 
-function Login(props) {
-  const {
-    store: { notifications },
-    dispatch
-  } = useContext(Context);
-  console.log(props);
+function Login({ intl }) {
+  const { dispatch } = useContext(Context);
   const [type, setType] = useState("login");
-  const {
-    intl // Injected by `injectIntl`
-  } = props;
-  const switchType = e => {
-    let newType = type === "login" ? "register" : "login";
-    setType(newType);
-  };
+  const switchType = () => setType(type === "login" ? "register" : "login");
 
   function callback(type, values) {
     return function() {

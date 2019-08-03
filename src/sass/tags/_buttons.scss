@@ -23,7 +23,7 @@
     }
 
     &:focus {
-      outline: 1px solid black;
+      text-decoration: underline;
     }
     &:focus {
       outline: 1px solid red;
@@ -31,13 +31,15 @@
   }
   &--custom {
     @extend .button;
+    background: $bgColor;
 
     &:hover {
-      background: adjust-color($bgColor, $red: -95, $blue: 20);
+      text-decoration: underline overline;
+      background: inherit;
     }
 
     &:focus {
-      outline: 1px solid black;
+      text-decoration: underline;
     }
   }
   &--nav {
