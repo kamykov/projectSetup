@@ -47,7 +47,7 @@ module.exports = merge(baseConfig, {
       //bodyHtmlSnippet: '<main class="main" id="app"></main>'
     }),
     new webpack.DefinePlugin({
-      __BASE___: JSON.stringify("GLOBAL VAR!!!")
+      __BASE__: JSON.stringify("GLOBAL VAR!!!")
     })
   ]
 });

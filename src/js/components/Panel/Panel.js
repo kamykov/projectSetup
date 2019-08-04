@@ -1,15 +1,7 @@
 import React, { useContext } from "react";
 import "./Panel.scss";
 
-import { Context } from "../../App";
-
-export default function Panel(props) {
-  const { dispatch } = useContext(Context);
-  const { max, min, dots, onChange } = props;
-
-  const handleOnchange = ({ target: { value } }) => {
-    onChange(value);
-  };
+export default function Panel({ max, min, dots, onChange }) {
   const stopAnimation = e => {
     e.preventDefault();
     console.log("stop");
@@ -23,8 +15,8 @@ export default function Panel(props) {
         name="dots"
         min={min}
         max={max}
-        value={props.dots}
-        onChange={handleOnchange}
+        value={dots}
+        onChange={onChange}
       />
       <div>Value: {dots}</div>
       <div>
@@ -32,4 +24,4 @@ export default function Panel(props) {
       </div>
     </div>
   );
-}
+} 

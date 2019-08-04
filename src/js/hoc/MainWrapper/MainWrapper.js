@@ -12,7 +12,7 @@ function MainWrapper({ children }) {
     dispatch
   } = useContext(Context);
 
-  const handlerOnChange = value => {
+  const handlerOnChange = ({ target: { value } }) => {
     dispatch({ type: SET_DOTS, value });
   };
   const classes = isMenuOpen ? ["main main--moveout"] : ["main"];

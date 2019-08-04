@@ -1,5 +1,6 @@
 export default {
   en: {
+    "Krzysztof Kamieniecki": "Krzysztof Kamieniecki",
     "Auth.Login": "Log in",
     "Auth.Register": "Register",
     "Auth.Password": "Password",
@@ -24,6 +25,7 @@ export default {
     "Auth.Register.Succes": "Register successed!"
   },
   pl: {
+    "Krzysztof Kamieniecki": "Krzysztof Kamieniecki",
     "Auth.Login": "Logowanie",
     "Auth.Register": "Rejestracja",
     "Auth.Username": "Nazwa użytkownika",

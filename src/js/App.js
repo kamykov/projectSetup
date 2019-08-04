@@ -18,8 +18,8 @@ import Loading from "./components/Loading/Loading.jsx";
 import Notifications from "./components/Notifications/Notifications.jsx";
 import reducer from "./reducers/storeReducer";
 
-if (__BASE___) {
-  console.log("__BASE___", __BASE___);
+if (__BASE__) {
+  console.log("__BASE__", __BASE__);
 }
 
 const initialState = {

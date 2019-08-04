@@ -23,11 +23,6 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   use: ['babel-loader','eslint-loader']
-      // },
       { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "babel-loader" },
       {
         test: /\.svg$/,
@@ -42,6 +37,15 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        exclude: /node_modules/,
+        loader: "file-loader",
+        options: {
+          name: "./fonts/[name].[ext]", // Output below ./fonts
+          publicPath: "../" // Take the directory into account
+        }
       }
     ]
   },

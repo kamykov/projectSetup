@@ -2,7 +2,6 @@
   background: $bgColor;
   position: absolute;
   width: 50vw;
-
   top: 20vh;
   left: calc(50% - 50vw / 2);
   z-index: 100;
@@ -20,22 +19,35 @@
   }
   .message {
     display: flex;
-    text-align: center;
-    align-items: center;
-    padding: $gap;
-
-    &:not(:last-child) {
-      border-bottom: 5px solid $bgDark;
-    }
+    padding: $gap 1em $gap 5.5em;
 
     @each $type, $color in $types {
       &.#{$type} {
-        border-left: 2em solid $color;
+        //border-left: 2em solid $color;
       }
     }
-    //@include message("background", #450056, ".error" ".success");
-    @debug message("background", #450056, "message.error" "message.lipa");
-    @debug get-color("success");
-    @debug map-get($types, "success");
+
+    &:after {
+      @include pseudoElement(100%);
+      font-family: "TS-icons", serif;
+      color: $bgColor;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      width: 2.5em;
+      left: 0;
+      top: 0;
+    }
+    @each $type, $color in $types {
+      &.#{$type}:after {
+        background: $color;
+      }
+    }
+    @each $type, $icon in $types-icons {
+      &.#{$type}:after {
+        content: $icon;
+      }
+    }
   }
 }

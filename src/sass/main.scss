@@ -1,3 +1,12 @@
+//  FONTS
+@font-face {
+  font-family: "TS-icons";
+  src: url("../assets/Jam-icons.eot");
+  src: url("../assets/Jam-icons.ttf") format("truetype"),
+    url("../assets/Jam-icons.woff") format("woff"),
+    url("../assets/Jam-icons.svg#filename") format("svg");
+}
+
 @import "variables.sass";
 @import "./utils/index";
 @import "./tags/index";

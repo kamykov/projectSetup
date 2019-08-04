@@ -14,7 +14,7 @@ export default function Notifications() {
   useEffect(() => {
     if (!isEmpty(notifications)) {
       setClasses(["notifications", "show"]);
-      const timer = setTimeout(() => setClasses(["notifications"]), 2000);
+      const timer = setTimeout(() => setClasses(["notifications"]), 7000);
       return () => clearTimeout(timer);
     }
   }, [notifications]);
