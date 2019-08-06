@@ -7,7 +7,9 @@ input {
   }
   &:focus {
     outline: none;
-    // outline-offset: -2px;
     box-shadow: $shadowLight;
+  }
+  &[type="range"]:focus {
+    box-shadow: none;
   }
 }

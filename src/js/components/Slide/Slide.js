@@ -5,9 +5,8 @@ function Slide({ children, delay }) {
   const [classes, setClasses] = useState("slide");
 
   useEffect(() => {
-    setTimeout(() => {
-      setClasses("slide slide--animated");
-    }, delay);
+    const timer = setTimeout(() => setClasses("slide slide--animated"), delay);
+    return () => clearTimeout(timer);
   }, [classes]);
 
   return <div className={classes}>{children}</div>;

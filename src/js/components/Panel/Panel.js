@@ -1,13 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
+import { FormattedMessage } from "react-intl";
 import "./Panel.scss";
 
 export default function Panel({ max, min, dots, onChange }) {
-  const stopAnimation = e => {
-    e.preventDefault();
-    console.log("stop");
-    //cancelAnimationFrame(rAF.current);
-  };
-
   return (
     <div className="panel">
       <input
@@ -18,10 +13,9 @@ export default function Panel({ max, min, dots, onChange }) {
         value={dots}
         onChange={onChange}
       />
-      <div>Value: {dots}</div>
       <div>
-        <button onClick={stopAnimation}>Stop</button>
+        <FormattedMessage id="Panel.Dots" defaultMessage="Dots" />: {dots}
       </div>
     </div>
   );
-} 
+}
