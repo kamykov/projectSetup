@@ -4,7 +4,7 @@ import { Context } from "../../App";
 import { injectIntl } from "react-intl";
 import "./Menu.scss";
 
-function Menu(props) {
+export function Menu(props) {
   const {
     store: { menu, isMenuOpen },
     dispatch

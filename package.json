@@ -24,6 +24,7 @@
     "bcrypt": "^3.0.6",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
+    "enzyme-react-intl": "^2.0.5",
     "formik": "^1.5.8",
     "http-proxy-middleware": "^0.19.1",
     "interweave": "^11.0.0",

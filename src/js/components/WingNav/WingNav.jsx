@@ -24,7 +24,7 @@ function WingNav(props) {
   const goToPage = e => {
     const isBack = e.target.classList.contains("back");
     const next = (isBack ? current - 1 : current + 1) % links.length;
-    //props.history.push(`/${links[next]}`);
+    props.history.push(`/slider#${links[next]}`);
     props.history.push(`/slider#${links[next]}`);
     setCurrent(next);
   };

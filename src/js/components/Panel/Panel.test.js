@@ -1,10 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-
 import Panel from "./Panel";
-
-// import Context from "../../App";
-// const { dispatch } = useContext(Context);
 
 function setup(props = { dots: 12 }) {
   const defaultProps = {
@@ -16,23 +12,26 @@ function setup(props = { dots: 12 }) {
     dispatch: jest.fn()
   };
   const wrapper = shallow(<Panel {...defaultProps} {...props} />, { context });
-  //const wrapper = (<Panel {...defaultProps} {...props} />, { context });
   return wrapper;
 }
 
-describe("Panel Basic render", () => {
-  let component;
-  test("should render", () => {
-    component = render(<Panel />);
-  });
-});
 
 describe("Panel Testing", () => {
   let wrapper;
-
+  
   beforeEach(() => {
     wrapper = setup();
     console.log(wrapper.debug());
+  });
+  
+  it('should render', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+ 
+  it('should render correctly with props', () => {
+    let dots = 14;
+    wrapper = <Panel dots={dots} />
+    expect(wrapper).toMatchSnapshot();
   });
 
   it("Should have dots property", () => {
@@ -42,6 +41,7 @@ describe("Panel Testing", () => {
 
   it("should call props.onChange on change", () => {
     const onChange = jest.fn();
+
     wrapper = shallow(<Panel onChange={onChange} />);
     wrapper.find("input[type='range']").simulate("change", 25);
 
@@ -50,6 +50,13 @@ describe("Panel Testing", () => {
 
   it("Should have an input of range type", () => {
     expect(wrapper.find("input[type='range']").exists()).toBe(true);
+  });
+
+  it("Renders a Panel component based on state", () => {
+    
+    wrapper.setState({dots: 22})
+    
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it("Should change a dots props", () => {
