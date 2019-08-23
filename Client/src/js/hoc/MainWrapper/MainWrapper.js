@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import "./MainWrapper.scss";
-import { SET_DOTS } from "../../actions/";
+import { SET_DOTS } from "../../actions";
 import { Context } from "../../App";
-import Canvas from "./../../hoc/Canvas/Canvas";
+import Canvas from "../Canvas/Canvas";
 import Panel from "../../components/Panel/Panel";
-import WingNav from "../../components/WingNav/WingNav.jsx";
+import WingNav from "../../components/WingNav/WingNav.jsx.js";
 
 function MainWrapper({ children }) {
   const {
