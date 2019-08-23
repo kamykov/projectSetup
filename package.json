@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Client && npm run build --prefix Client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm install --prefix Client && npm run build --prefix Client"
+  },
+  "engines": {
+    "node": "10.13.0",
+    "npm": "6.x"
   },
   "keywords": [],
   "author": "",
