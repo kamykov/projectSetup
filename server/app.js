@@ -1,12 +1,13 @@
 const Koa = require("Koa");
 const mongo = require("koa-mongo");
 const mongoose = require("mongoose");
-
 const bodyParser = require("koa-bodyparser");
 const json = require("koa-json");
 const cors = require("@koa/cors");
 const session = require("koa-session");
 const passport = require("koa-passport");
+
+const PORT = process.env.PORT || 3000;
 
 const app = new Koa();
 const site = require("./routes/site");
@@ -62,4 +63,4 @@ app.use(function*(next) {
   yield next;
 });
 
-app.listen(3000, () => console.log("Server Started ..."));
+app.listen(PORT, () => console.log("Server Started ..."));
