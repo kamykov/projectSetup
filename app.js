@@ -1,3 +1,4 @@
+const serve = require("koa-static");
 const Koa = require("Koa");
 const mongo = require("koa-mongo");
 const mongoose = require("mongoose");
@@ -11,6 +12,18 @@ const PORT = process.env.PORT || 3000;
 
 const app = new Koa();
 const site = require("./routes/site");
+
+// Serve static assets in production
+
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(serve("Client/dist"));
+  app.get("*", async ctx => {
+    ctx.response.sendFile(
+      path.resolve(__dirname, "Client", "dist", "index.html")
+    );
+  });
+}
 
 mongoose
   .connect("mongodb://localhost/tsDB")
