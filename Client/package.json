@@ -41,9 +41,13 @@
     "react-router-dom": "^5.0.1",
     "react-svg-loader": "^2.1.0",
     "redux": "^4.0.4",
-    "url-loader": "^2.1.0"
-  },
-  "devDependencies": {
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.2",
+    "webpack-bundle-analyzer": "^3.4.1",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0",
+    "webpack-merge": "^4.2.1",
+    "yargs": "^13.3.0",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
@@ -62,12 +66,6 @@
     "mini-css-extract-plugin": "^0.6.0",
     "react-scripts": "^3.1.1",
     "sass-loader": "^7.3.1",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.39.2",
-    "webpack-bundle-analyzer": "^3.4.1",
-    "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0",
-    "webpack-merge": "^4.2.1",
-    "yargs": "^13.3.0"
+    "style-loader": "^0.23.1"
   }
 }

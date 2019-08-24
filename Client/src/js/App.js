@@ -2,20 +2,20 @@ import React, { useReducer, useContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { IntlProvider, FormattedMessage } from "react-intl";
 import axios from "axios";
-import translations from "../translations/langs.js.js";
+import translations from "../translations/langs.js";
 const instance = axios.create({
   baseURL: "http://localhost:3000/"
 });
 
 import MainWrapper from "./hoc/MainWrapper/MainWrapper";
 import Header from "./components/Header/Header";
-import Menu from "./components/Menu/Menu.jsx.js";
-import Page from "./components/Page/Page.jsx.js";
-import PageSlider from "./components/PageSlider/PageSlider.jsx.js";
-import Profile from "./components/Profile/Profile.jsx.js";
-import Login from "./components/Login/Login.jsx.js";
-import Loading from "./components/Loading/Loading.jsx.js";
-import Notifications from "./components/Notifications/Notifications.jsx.js";
+import Menu from "./components/Menu/Menu.jsx";
+import Page from "./components/Page/Page.jsx";
+import PageSlider from "./components/PageSlider/PageSlider.jsx";
+import Profile from "./components/Profile/Profile.jsx";
+import Login from "./components/Login/Login.jsx";
+import Loading from "./components/Loading/Loading.jsx";
+import Notifications from "./components/Notifications/Notifications.jsx";
 import reducer from "./reducers/storeReducer";
 
 if (__BASE__) {

@@ -1,5 +1,6 @@
 const serve = require("koa-static");
-const Koa = require("Koa");
+const sendfile = require("koa-sendfile");
+const Koa = require("koa");
 const mongo = require("koa-mongo");
 const mongoose = require("mongoose");
 const bodyParser = require("koa-bodyparser");
@@ -15,31 +16,30 @@ const site = require("./routes/site");
 
 // Serve static assets in production
 
-if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(serve("Client/dist"));
-  app.get("*", async ctx => {
-    ctx.response.sendFile(
-      path.resolve(__dirname, "Client", "dist", "index.html")
-    );
-  });
-}
-
 mongoose
-  .connect("mongodb://localhost/tsDB")
+  .connect(`mongodb://boss:bossek1@ds213178.mlab.com:13178/tsdb`)
   .then(() => console.log("Now connected to MongoDB!"))
   .catch(err => console.error("Something went wrong", err));
 mongoose.set("debug", true);
 
 app.use(
   mongo({
-    host: "localhost",
-    port: 27017,
-    user: "admin",
-    pass: "",
-    db: "tsDB"
+    host: "ds213178.mlab.com",
+    port: 13178,
+    user: "boss",
+    pass: "bossek1",
+    db: "tsdb"
   })
 );
+// app.use(
+//   mongo({
+//     host: "localhost",
+//     port: 27017,
+//     user: "admin",
+//     pass: "",
+//     db: "tsDB"
+//   })
+// );
 app.keys = ["secret"];
 
 app.use(bodyParser());
@@ -68,6 +68,16 @@ app.use(function*(next) {
   yield next;
 });
 app.use(json()).use(site.routes());
+app.use(serve("Client/dist"));
+
+if (process.env.NODE_ENV === "production") {
+  console.log(process.env.NODE_ENV);
+}
+
+app.use(function* index() {
+  yield sendfile(this, path.resolve(__dirname, "Client", "dist", "index.html"));
+  if (!this.status) this.throw(404);
+});
 
 app.use(function*(next) {
   if (404 != this.status) return;

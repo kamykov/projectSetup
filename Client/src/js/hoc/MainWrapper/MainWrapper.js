@@ -4,7 +4,7 @@ import { SET_DOTS } from "../../actions";
 import { Context } from "../../App";
 import Canvas from "../Canvas/Canvas";
 import Panel from "../../components/Panel/Panel";
-import WingNav from "../../components/WingNav/WingNav.jsx.js";
+import WingNav from "../../components/WingNav/WingNav.jsx";
 
 function MainWrapper({ children }) {
   const {
