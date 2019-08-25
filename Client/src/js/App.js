@@ -18,10 +18,6 @@ import Loading from "./components/Loading/Loading.jsx";
 import Notifications from "./components/Notifications/Notifications.jsx";
 import reducer from "./reducers/storeReducer";
 
-if (__BASE__) {
-  console.log("__BASE__", __BASE__);
-}
-
 const initialState = {
   lang: "en",
   isMenuOpen: false,

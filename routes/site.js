@@ -1,28 +1,24 @@
 const Router = require("koa-router");
 const router = new Router();
 const mongo = require("koa-mongo");
-const mongoose = require("mongoose");
+//const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const passport = require("koa-passport");
 
-//const User = require("../models/User");
+//import User from "../models/User";
+const Page = require("../models/pages");
 // const User = mongoose.model("User");
 const validateLoginInput = require("../validation/login");
 const validateRegisterInput = require("../validation/register");
 
 router
   .get("/data", async (ctx, next) => {
-    ctx.body = await ctx.db
-      .collection("pages")
-      .find()
-      .toArray();
+    console.log("fetching pages");
+    ctx.body = await Page.find();
   })
   .get("/users", async ctx => {
     ctx.response.status = 202;
-    ctx.body = await ctx.db
-      .collection("users")
-      .find()
-      .toArray();
+    ctx.body = await User.find();
   })
   .get("/not_found", async ctx => {
     ctx.body = [{ type: "warnning", message: "URL.Not.Found" }];
