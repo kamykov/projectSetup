@@ -1,7 +1,6 @@
 const serve = require("koa-static");
 const sendfile = require("koa-sendfile");
 const Koa = require("koa");
-const mongo = require("koa-mongo");
 const mongoose = require("mongoose");
 const bodyParser = require("koa-bodyparser");
 const json = require("koa-json");
@@ -16,8 +15,8 @@ const PORT = process.env.PORT || 3000;
 
 const app = new Koa();
 const site = require("./routes/site");
+require("./auth/auth")(passport);
 
-// Serve static assets in production
 // mongodb://boss:bossek1@ds213178.mlab.com:13178/tsdb
 // mongodb://localhost/tsDB
 
@@ -32,30 +31,10 @@ mongoose.connection.once("open", () => {
   console.log("connected to database");
 });
 
-// app.use(
-//   mongo({
-//     host: "ds213178.mlab.com",
-//     port: 13178,
-//     user: "boss",
-//     pass: "bossek1",
-//     db: "tsdb"
-//   })
-// );
-// app.use(
-//   mongo({
-//     host: "localhost",
-//     port: 27017,
-//     user: "admin",
-//     pass: "",
-//     db: "tsDB"
-//   })
-// );
 app.keys = ["secret"];
-
 app.use(bodyParser());
 app.use(cors());
 
-require("./auth/auth")(passport);
 app.use(session({}, app));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -94,12 +73,11 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-console.log(process.env.NODE_ENV);
 app.use(function* index() {
-  console.log("index must be served....");
   yield sendfile(this, path.resolve(__dirname, "Client", "dist", "index.html"));
   if (!this.status) this.throw(404);
 });
+
 app.use(function*(next) {
   if (404 != this.status) return;
   console.log("Upsss", this.status);
@@ -107,4 +85,4 @@ app.use(function*(next) {
   yield next;
 });
 
-app.listen(PORT, () => console.log("Server Started ..."));
+app.listen(PORT, () => console.log(`Server Started ... at port ${PORT}`));

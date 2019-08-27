@@ -46,6 +46,15 @@ module.exports = {
           name: "./fonts/[name].[ext]", // Output below ./fonts
           publicPath: "../" // Take the directory into account
         }
+      },
+      {
+        test: /\.(ico)$/,
+        exclude: /node_modules/,
+        loader: "file-loader",
+        options: {
+          name: "./[name].[ext]", // Output below ./fonts
+          publicPath: "../" // Take the directory into account
+        }
       }
     ]
   },

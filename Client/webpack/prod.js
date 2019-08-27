@@ -29,8 +29,20 @@ module.exports = merge(common, {
     }),
     new HtmlWebpackPlugin({
       title: Package.description,
-      inject: false,
-      template: path.join(ROOT_DIR, "src", "templates", "index.ejs")
+      // inject: false,
+      template: path.join(ROOT_DIR, "src", "templates", "index.ejs"),
+      template: require("html-webpack-template"),
+      favicon: path.join(ROOT_DIR, "src", "img", "favicon.ico"),
+      meta: [
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1, shrink-to-fit=no"
+        }
+      ],
+      googleAnalytics: {
+        trackingId: "UA-61042044-1",
+        pageViewOnLoad: true
+      }
     })
   ]
 });

@@ -43,8 +43,7 @@ module.exports = merge(baseConfig, {
       title: Package.description,
       inject: false,
       template: path.join(ROOT_DIR, "src", "templates", "index.ejs")
-      //template: require("html-webpack-template"),
-      //bodyHtmlSnippet: '<main class="main" id="app"></main>'
+      //template: require("html-webpack-template")
     }),
     new webpack.DefinePlugin({
       __BASE__: JSON.stringify("GLOBAL VAR!!!")
