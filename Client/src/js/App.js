@@ -96,7 +96,7 @@ export default function App() {
                 <Route path="not_found" render={props => <h1>"OK"</h1>} />
                 <Route
                   path="/"
-                  render={props => <Page {...props} content={content[0]} />}
+                  render={props => <PageSlider {...props} content={content} />}
                 />
               </Switch>
             )}

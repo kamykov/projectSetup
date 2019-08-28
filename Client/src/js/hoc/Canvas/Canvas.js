@@ -1,54 +1,42 @@
-import React, {
-  useState,
-  useContext,
-  useRef,
-  useLayoutEffect,
-  useEffect
-} from "react";
-import { Context } from "../../App";
-
+import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
+import useWindowSize from "../../utils/useWindowSize";
 import * as lib from "../../utils/canvasUtils";
 import "./Canvas.scss";
 
-export default function Canvas(props) {
-  const {
-    color = "rgba(255,0,0, .5)",
-    stroke = "rgba(200,200,200, .5)"
-    //dots = props.dots || 12
-  } = props;
+export default function Canvas({
+  color = "rgba(255,0,0, .5)",
+  stroke = "rgba(200,200,200, .5)",
+  dots = 12
+}) {
   let ctx;
-  const {
-    store: { dots }
-  } = useContext(Context);
-  console.log(dots);
-
-  const [size, setSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
-  });
+  const size = useWindowSize();
   const allPoints = lib.generate(100, lib.dotInDiv, size, 2, 2, color);
   const [points, setPoints] = useState(allPoints.slice(0, 12));
   const wrapperRef = useRef();
   const rAF = useRef();
   const canvasRef = useRef();
 
+  useEffect(() => {
+    let newPoints = allPoints.slice(0, dots);
+    setPoints(newPoints);
+    return () => {};
+  }, [dots, size]);
+
   useLayoutEffect(() => {
     ctx = canvasRef.current.getContext("2d");
-    canvasRef.current.width = size.width;
-    canvasRef.current.height = size.height;
+    canvasRef.current.width = size.width - 10;
+    canvasRef.current.height = size.height - 10;
     ctx.strokeStyle = stroke;
     ctx.fillStyle = color;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     ctx.save();
-    let newPoints = allPoints.slice(0, dots);
-    setPoints(newPoints);
     updateAnimationState();
     console.log("useLayoutEffect", points.length, size, canvasRef, ctx, rAF);
     return () => {
       setPoints(null);
       cancelAnimationFrame(rAF.current);
     };
-  }, [dots]);
+  }, [dots, size]);
 
   function updateAnimationState() {
     lib.clearCanvas(size, ctx);
@@ -61,20 +49,6 @@ export default function Canvas(props) {
       lib.update2(point, size);
     });
     rAF.current = requestAnimationFrame(updateAnimationState);
-  }
-
-  function handleResize(e) {
-    // if (wrapperRef.current) {
-    //   setSize({
-    //     width: 6000,
-    //     height: 6000
-    //   });
-    //   console.log(wrapperRef.current);
-    //   canvasRef.current.width = size.width;
-    //   canvasRef.current.height = size.height;
-    //   ctx.fillStyle = color;
-    //   ctx.strokeStyle = stroke;
-    // }
   }
 
   return (
