@@ -20,7 +20,7 @@ function MainWrapper({ children }) {
     <main className={classes}>
       {children}
       <Canvas dots={dots} />
-      <Panel dots={dots} min="3" max="30" onChange={handlerOnChange} />
+      <Panel dots={dots} min={3} max={30} onChange={handlerOnChange} />
       <WingNav />
     </main>
   );

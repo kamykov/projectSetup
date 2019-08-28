@@ -18,6 +18,9 @@ import Loading from "./components/Loading/Loading.jsx";
 import Notifications from "./components/Notifications/Notifications.jsx";
 import reducer from "./reducers/storeReducer";
 
+import { storageAvailable } from "./utils/helpers";
+import { SET_LANG, SET_DOTS } from "./actions/index.js";
+
 const initialState = {
   lang: "en",
   isMenuOpen: false,
@@ -38,6 +41,16 @@ export default function App() {
   const [store, dispatch] = useReducer(reducer, initialState);
 
   const [content, setContent] = useState(undefined);
+
+  useEffect(() => {
+    if (storageAvailable("localStorage")) {
+      let lang = localStorage.getItem("lang");
+      let dots = localStorage.getItem("dots");
+      if (lang) dispatch({ type: SET_LANG, lang });
+      if (dots) dispatch({ type: SET_DOTS, value: dots });
+    }
+    return () => {};
+  }, []);
 
   useEffect(() => {
     instance
