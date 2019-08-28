@@ -10,7 +10,7 @@ export default function Canvas({
 }) {
   let ctx;
   const size = useWindowSize();
-  const allPoints = lib.generate(100, lib.dotInDiv, size, 2, 2, color);
+  const allPoints = lib.generate(30, lib.dotInDiv, size, 2, 2, color);
   const [points, setPoints] = useState(allPoints.slice(0, 12));
   const wrapperRef = useRef();
   const rAF = useRef();

@@ -6,8 +6,8 @@ import Slide from "../Slide/Slide";
 import "./Page.scss";
 import Logo from "../../../img/logo.svg";
 
-function Page({ content: { title, subtitle, headline, content }, intl }) {
-  const titleTranslation = intl.formatMessage({ id: title });
+function Page({ content: { translation, subtitle, headline, content }, intl }) {
+  const titleTranslation = intl.formatMessage({ id: translation });
   return (
     <div className="page">
       <div className="page__content">
