@@ -10,7 +10,6 @@ const instance = axios.create({
 import MainWrapper from "./hoc/MainWrapper/MainWrapper";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu.jsx";
-import Page from "./components/Page/Page.jsx";
 import PageSlider from "./components/PageSlider/PageSlider.jsx";
 import Profile from "./components/Profile/Profile.jsx";
 import Login from "./components/Login/Login.jsx";
@@ -31,7 +30,6 @@ const initialState = {
     { title: "Menu.About", link: "omnie" },
     { title: "Menu.Training", link: "szkolenia" },
     { title: "Menu.Contact", link: "kontakt" }
-    // { title: "Auth.Login", link: "login" }
   ]
 };
 
@@ -74,19 +72,6 @@ export default function App() {
               <Loading />
             ) : (
               <Switch>
-                <Route
-                  exact
-                  path="/szkolenia"
-                  render={props => <Page {...props} content={content[3]} />}
-                />
-                <Route
-                  path="/omnie"
-                  render={props => <Page {...props} content={content[2]} />}
-                />
-                <Route
-                  path="/kontakt"
-                  render={props => <Page {...props} content={content[1]} />}
-                />
                 <Route
                   path="/slider"
                   render={props => <PageSlider {...props} content={content} />}

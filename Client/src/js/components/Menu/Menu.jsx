@@ -25,7 +25,7 @@ export function Menu(props) {
     return (
       <li className="menu__element" key={index}>
         <NavLink
-          to={`/${link}`}
+          to={`/slider#${link}`}
           exact
           className="menu__link link--surinami"
           activeClassName="menu__link--selected"

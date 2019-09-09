@@ -9,7 +9,7 @@ const pageSchema = new mongoose.Schema({
   subtitle: String,
   headline: String,
   img: String,
-  content: String,
+  content: { type: Map, of: String },
   date: Date
 });
 

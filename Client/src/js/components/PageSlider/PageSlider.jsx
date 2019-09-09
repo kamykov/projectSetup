@@ -10,7 +10,7 @@ import Logo from "../../../img/logo.svg";
 
 function PageSlider({ content, location: { hash }, intl }) {
   const {
-    store: { menu }
+    store: { menu, lang }
   } = useContext(Context);
   const current = Math.max(
     0,
@@ -44,7 +44,7 @@ function PageSlider({ content, location: { hash }, intl }) {
             <h3 className="page__title">{headlineTranslation}</h3>
             <div className="page__text">
               <Slide delay={500}>
-                <Markup content={content} />
+                <Markup content={content[lang]} />
               </Slide>
             </div>
           </Fragment>
