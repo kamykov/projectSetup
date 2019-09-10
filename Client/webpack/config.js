@@ -1,18 +1,16 @@
 const path = require("path");
 const webpack = require("webpack");
-
-console.log(path.join(process.cwd(), "dist"));
-console.log(path.join(__dirname, "dist"));
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const banner = require("./scripts/banner");
+const Package = require("../package.json");
+const ROOT_DIR = process.cwd();
 
 const params = require("yargs").options({
   ts: {
     default: "TS"
   }
 }).argv;
-
-console.log("yargs: (%s)", params.ts);
-console.log("yargs._: ", params._);
-//console.log("__BASE__" + __BASE__);
 
 module.exports = {
   entry: ["./src/js/index.js", "./src/sass/main.scss"],
@@ -58,5 +56,25 @@ module.exports = {
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new CleanWebpackPlugin(),
+    new webpack.BannerPlugin({ banner }),
+    new HtmlWebpackPlugin({
+      title: Package.description,
+      // inject: false,
+      template: path.join(ROOT_DIR, "src", "templates", "index.ejs"),
+      //template: require("html-webpack-template"),
+      favicon: path.resolve(ROOT_DIR, "src", "img", "favicon.ico"),
+      meta: [
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1, shrink-to-fit=no"
+        }
+      ],
+      googleAnalytics: {
+        trackingId: "UA-61042044-1",
+        pageViewOnLoad: true
+      }
+    })
+  ]
 };

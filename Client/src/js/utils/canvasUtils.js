@@ -39,8 +39,6 @@ export function update2(point, size, time) {
   point.x = point.destination.x > point.x ? point.x + delta : point.x - delta;
   point.y = point.destination.y > point.y ? point.y + delta : point.y - delta;
 
-  //console.log(distance(point.destination, point));
-
   if (distance(point.destination, point) < 5) {
     point.markDestination(randomPoint(size));
   }

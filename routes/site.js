@@ -13,7 +13,6 @@ const validateRegisterInput = require("../validation/register");
 
 router
   .get("/data", async (ctx, next) => {
-    console.log("fetching pages");
     ctx.body = await Page.find();
   })
   .get("/users", async ctx => {
@@ -24,7 +23,6 @@ router
     ctx.body = [{ type: "warnning", message: "URL.Not.Found" }];
   })
   .get("/user/status", async ctx => {
-    console.log("back / /user/status");
     ctx.body = [{ type: "success", message: "Auth.Login.Success" }];
   })
   .get("/user/:id", async ctx => {

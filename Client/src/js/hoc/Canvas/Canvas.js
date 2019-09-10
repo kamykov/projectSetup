@@ -31,7 +31,6 @@ export default function Canvas({
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     ctx.save();
     updateAnimationState();
-    console.log("useLayoutEffect", points.length, size, canvasRef, ctx, rAF);
     return () => {
       setPoints(null);
       cancelAnimationFrame(rAF.current);
