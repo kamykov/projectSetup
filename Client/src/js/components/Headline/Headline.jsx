@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import "./Headline.scss";
+import React, { useState, useEffect } from 'react';
+import './Headline.scss';
 
-import { setTimeout } from "timers";
+import { setTimeout } from 'timers';
 
 export default function Headline({ children, delay = 60 }) {
-  const [classes, setClasses] = useState("letter");
+  const [classes, setClasses] = useState('letter');
 
   useEffect(() => {
     setTimeout(() => {
-      setClasses("letter letter--animated");
+      setClasses('letter letter--animated');
     }, 150);
   }, [classes]);
 
   const html = Array.from(children).map((letter, index) => {
-    let minWidth = letter === " " ? ".5em" : "auto";
+    const minWidth = letter === ' ' ? '.5em' : 'auto';
     return (
       <span
         key={letter + index}

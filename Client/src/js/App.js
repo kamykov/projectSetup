@@ -1,36 +1,39 @@
-import React, { useReducer, useContext, useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { IntlProvider, FormattedMessage } from "react-intl";
-import axios from "axios";
-import translations from "../translations/langs.js";
+import React, {
+  useReducer, useState, useEffect,
+} from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import axios from 'axios';
+import translations from '../translations/langs.js';
+
+import MainWrapper from './hoc/MainWrapper/MainWrapper.jsx';
+import Header from './components/Header/Header';
+import Menu from './components/Menu/Menu.jsx';
+import PageSlider from './components/PageSlider/PageSlider.jsx';
+import Profile from './components/Profile/Profile.jsx';
+import Login from './components/Login/Login.jsx';
+import Loading from './components/Loading/Loading.jsx';
+import Notifications from './components/Notifications/Notifications.jsx';
+import reducer from './reducers/storeReducer';
+
+import { storageAvailable } from './utils/helpers';
+import { SET_LANG, SET_DOTS } from './actions/index.js';
+
 const instance = axios.create({
-  baseURL: "http://localhost:3000/"
+  baseURL: 'http://localhost:3000/',
 });
 
-import MainWrapper from "./hoc/MainWrapper/MainWrapper";
-import Header from "./components/Header/Header";
-import Menu from "./components/Menu/Menu.jsx";
-import PageSlider from "./components/PageSlider/PageSlider.jsx";
-import Profile from "./components/Profile/Profile.jsx";
-import Login from "./components/Login/Login.jsx";
-import Loading from "./components/Loading/Loading.jsx";
-import Notifications from "./components/Notifications/Notifications.jsx";
-import reducer from "./reducers/storeReducer";
-
-import { storageAvailable } from "./utils/helpers";
-import { SET_LANG, SET_DOTS } from "./actions/index.js";
-
 const initialState = {
-  lang: "en",
+  lang: 'en',
   isMenuOpen: false,
   notifications: {},
   dots: 12,
   menu: [
-    { title: "Menu.Home", link: "home" },
-    { title: "Menu.About", link: "omnie" },
-    { title: "Menu.Training", link: "szkolenia" },
-    { title: "Menu.Contact", link: "kontakt" }
-  ]
+    { title: 'Menu.Home', link: 'home' },
+    { title: 'Menu.About', link: 'omnie' },
+    { title: 'Menu.Training', link: 'szkolenia' },
+    { title: 'Menu.Contact', link: 'kontakt' },
+  ],
 };
 
 export const Context = React.createContext(initialState);
@@ -41,24 +44,24 @@ export default function App() {
   const [content, setContent] = useState(undefined);
 
   useEffect(() => {
-    if (storageAvailable("localStorage")) {
-      let lang = localStorage.getItem("lang");
-      let dots = localStorage.getItem("dots");
+    if (storageAvailable('localStorage')) {
+      const lang = localStorage.getItem('lang');
+      const dots = localStorage.getItem('dots');
       if (lang) dispatch({ type: SET_LANG, lang });
       if (dots) dispatch({ type: SET_DOTS, value: dots });
     }
-    return () => {};
+    return () => { };
   }, []);
 
   useEffect(() => {
     instance
-      .get("/data")
-      .then(res => {
+      .get('/data')
+      .then((res) => {
         setContent(res.data);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
 
-    return () => {};
+    return () => { };
   }, []);
 
   return (
@@ -72,18 +75,18 @@ export default function App() {
               <Loading />
             ) : (
               <Switch>
-                <Route
-                  path="/slider"
-                  render={props => <PageSlider {...props} content={content} />}
-                />
-                <Route path="/login" render={props => <Login />} />
-                <Route path="/user/status" render={props => <Profile />} />
-                <Route path="not_found" render={props => <h1>"OK"</h1>} />
-                <Route
-                  path="/"
-                  render={props => <PageSlider {...props} content={content} />}
-                />
-              </Switch>
+                  <Route
+                    path="/slider"
+                    render={(props) => <PageSlider {...props} content={content} />}
+                  />
+                  <Route path="/login" render={() => <Login />} />
+                  <Route path="/user/status" render={() => <Profile />} />
+                  <Route path="not_found" render={() => <h1>OK</h1>} />
+                  <Route
+                    path="/"
+                    render={(props) => <PageSlider {...props} content={content} />}
+                  />
+                </Switch>
             )}
           </MainWrapper>
           <Notifications />

@@ -1,20 +1,20 @@
-import React, { useContext, useEffect } from "react";
-import { Context } from "../../App";
-import { SET_LANG } from "../../actions";
+import React, { useContext } from 'react';
+import { Context } from '../../App';
+import { SET_LANG } from '../../actions';
 
 export default function LangSwitcher() {
   const {
     store: { lang },
-    dispatch
+    dispatch,
   } = useContext(Context);
-  let langs = ["pl", "en"];
+  const langs = ['pl', 'en'];
 
-  const setLang = lang => {
+  const setLang = (lang) => {
     dispatch({ type: SET_LANG, lang });
   };
 
-  let content = langs.map(language => {
-    let classess = language === lang ? "button--nav active" : "button--nav";
+  const content = langs.map((language) => {
+    const classess = language === lang ? 'button--nav active' : 'button--nav';
     return (
       <button
         type="button"

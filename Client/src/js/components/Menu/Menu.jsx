@@ -1,29 +1,29 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { Context } from "../../App";
-import { injectIntl } from "react-intl";
-import "./Menu.scss";
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { injectIntl } from 'react-intl';
+import { Context } from '../../App';
+import './Menu.scss';
 
 export function Menu(props) {
   const {
     store: { menu, isMenuOpen },
-    dispatch
+    dispatch,
   } = useContext(Context);
 
-  const classes = isMenuOpen ? ["menu", "is-visible"] : ["menu"];
+  const classes = isMenuOpen ? ['menu', 'is-visible'] : ['menu'];
   const { intl } = props;
   function handleClick() {
-    dispatch({ type: "SWITCH_MENU" });
+    dispatch({ type: 'SWITCH_MENU' });
   }
 
   const menuItems = menu.map((item, index) => {
-    let { title, link } = item;
-    let translated = intl.formatMessage({ id: title });
-    let half = parseInt(translated.length / 2);
-    let [l, r] = [translated.slice(0, half), translated.slice(half)];
+    const { title, link } = item;
+    const translated = intl.formatMessage({ id: title });
+    const half = parseInt(translated.length / 2, 10);
+    const [l, r] = [translated.slice(0, half), translated.slice(half)];
 
     return (
-      <li className="menu__element" key={index}>
+      <li className="menu__element" key={`${item}${index}`}>
         <NavLink
           to={`/slider#${link}`}
           exact
@@ -40,8 +40,8 @@ export function Menu(props) {
   });
 
   return (
-    <div className={classes.join(" ")}>
-      <button className="menu__button" onClick={handleClick} />
+    <div className={classes.join(' ')}>
+      <button type="button" className="menu__button" onClick={handleClick} />
       <ul className="menu__list">{menuItems}</ul>
     </div>
   );

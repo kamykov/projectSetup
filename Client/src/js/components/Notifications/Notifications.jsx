@@ -1,26 +1,27 @@
-import React, { useContext, useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
-import { Context } from "../../App";
+/* eslint-disable consistent-return */
+import React, { useContext, useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Context } from '../../App';
 
-import { isEmpty } from "../../utils/helpers";
+import { isEmpty } from '../../utils/helpers';
 
 export default function Notifications() {
   const {
-    store: { notifications }
+    store: { notifications },
   } = useContext(Context);
-  const [classes, setClasses] = useState(["notifications"]);
+  const [classes, setClasses] = useState(['notifications']);
   let content = null;
 
   useEffect(() => {
     if (!isEmpty(notifications)) {
-      setClasses(["notifications", "show"]);
-      const timer = setTimeout(() => setClasses(["notifications"]), 2000);
+      setClasses(['notifications', 'show']);
+      const timer = setTimeout(() => setClasses(['notifications']), 2000);
       return () => clearTimeout(timer);
     }
   }, [notifications]);
 
   if (!isEmpty(notifications)) {
-    content = notifications.map(notification => (
+    content = notifications.map((notification) => (
       <span
         className={`message ${notification.type}`}
         key={notification.message}
@@ -33,5 +34,5 @@ export default function Notifications() {
     ));
   }
 
-  return <div className={classes.join(" ")}>{content}</div>;
+  return <div className={classes.join(' ')}>{content}</div>;
 }

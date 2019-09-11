@@ -4,9 +4,6 @@ const merge = require("webpack-merge");
 const baseConfig = require("./config.js");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const Package = require("../package.json");
-const ROOT_DIR = process.cwd();
-
 module.exports = merge(baseConfig, {
   mode: "development",
   devtool: "source-map",
