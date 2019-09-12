@@ -3,8 +3,8 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { Formik } from 'formik';
 import axios from 'axios';
-import { Context } from '../../App';
 import { SEND_NOTIFICATION, USER_LOGIN_SUCCES } from '../../actions';
+import { Context } from '../../App';
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000/',

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import './Panel.scss';
 
@@ -24,3 +25,16 @@ export default function Panel({
     </div>
   );
 }
+
+Panel.propTypes = {
+  max: PropTypes.number,
+  min: PropTypes.number,
+  dots: PropTypes.number,
+  onChange: PropTypes.func,
+};
+Panel.defaultProps = {
+  max: 30,
+  min: 1,
+  dots: 5,
+  onChange: () => {},
+};

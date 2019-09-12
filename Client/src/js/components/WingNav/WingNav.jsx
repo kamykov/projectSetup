@@ -9,12 +9,13 @@ function WingNav(props) {
   } = useContext(Context);
 
   const [current, setCurrent] = useState(1);
-  const { pathname } = props.location;
+  const { location: { pathname } } = props;
   const links = menu.map((item) => item.link);
   const [backClasses, forwardClasses] = [
     ['button-wingnav', 'back'],
     ['button-wingnav', 'forward'],
   ];
+  // eslint-disable-next-line no-unused-expressions
   current === 0 && backClasses.push('hidden');
 
   useEffect(() => {

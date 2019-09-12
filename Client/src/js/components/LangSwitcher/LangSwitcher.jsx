@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Context } from '../../App';
 import { SET_LANG } from '../../actions';
+import { Context } from '../../App';
 
 export default function LangSwitcher() {
   const {
@@ -9,8 +9,8 @@ export default function LangSwitcher() {
   } = useContext(Context);
   const langs = ['pl', 'en'];
 
-  const setLang = (lang) => {
-    dispatch({ type: SET_LANG, lang });
+  const setLang = (newLang) => {
+    dispatch({ type: SET_LANG, newLang });
   };
 
   const content = langs.map((language) => {

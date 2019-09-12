@@ -1,14 +1,15 @@
 import React, {
   useState, useRef, useLayoutEffect, useEffect,
 } from 'react';
+import PropTypes from 'prop-types';
 import useWindowSize from '../../utils/useWindowSize';
 import * as lib from '../../utils/canvasUtils';
 import './Canvas.scss';
 
-export default function Canvas({
-  color = 'rgba(255,0,0, .5)',
-  stroke = 'rgba(200,200,200, .5)',
-  dots = 12,
+function Canvas({
+  color,
+  stroke,
+  dots,
 }) {
   let ctx;
   const size = useWindowSize();
@@ -58,3 +59,15 @@ export default function Canvas({
     </div>
   );
 }
+Canvas.propTypes = {
+  color: PropTypes.string,
+  stroke: PropTypes.string,
+  dots: PropTypes.number,
+};
+Canvas.defaultProps = {
+  color: 'rgba(255,0,0, .5)',
+  stroke: 'rgba(200,200,200, .5)',
+  dots: 12,
+};
+
+export default Canvas;

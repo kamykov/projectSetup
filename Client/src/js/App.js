@@ -4,20 +4,20 @@ import React, {
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import axios from 'axios';
-import translations from '../translations/langs.js';
+import translations from '../translations/langs';
 
-import MainWrapper from './hoc/MainWrapper/MainWrapper.jsx';
+import MainWrapper from './hoc/MainWrapper/MainWrapper';
 import Header from './components/Header/Header';
-import Menu from './components/Menu/Menu.jsx';
-import PageSlider from './components/PageSlider/PageSlider.jsx';
-import Profile from './components/Profile/Profile.jsx';
-import Login from './components/Login/Login.jsx';
-import Loading from './components/Loading/Loading.jsx';
-import Notifications from './components/Notifications/Notifications.jsx';
+import Menu from './components/Menu/Menu';
+import PageSlider from './components/PageSlider/PageSlider';
+import Profile from './components/Profile/Profile';
+import Login from './components/Login/Login';
+import Loading from './components/Loading/Loading';
+import Notifications from './components/Notifications/Notifications';
 import reducer from './reducers/storeReducer';
 
 import { storageAvailable } from './utils/helpers';
-import { SET_LANG, SET_DOTS } from './actions/index.js';
+import { SET_LANG, SET_DOTS } from './actions';
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000/',
