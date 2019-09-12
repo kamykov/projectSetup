@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import React, { useContext, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Context } from '../../App';
+import { Context } from '../../context/storeContext';
 
 import { isEmpty } from '../../utils/helpers';
 

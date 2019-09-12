@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { injectIntl } from 'react-intl';
-import { Context } from '../../App';
+import { Context } from '../../context/storeContext';
 import './Menu.scss';
 
 export function Menu({ intl }) {

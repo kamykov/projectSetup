@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { SET_LANG } from '../../actions';
-import { Context } from '../../App';
+import { Context } from '../../context/storeContext';
 
 export default function LangSwitcher() {
   const {

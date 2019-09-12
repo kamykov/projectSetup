@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import Submenu from '../Submenu/Submenu';
-import { Context } from '../../App';
+import { Context } from '../../context/storeContext';
 import './Header.scss';
 
 export default function Header() {

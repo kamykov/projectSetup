@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { Markup } from 'interweave';
-import { Context } from '../../App';
-import Headline from '../Headline/Headline.jsx';
-import Slide from '../Slide/Slide.jsx';
+import { Context } from '../../context/storeContext';
+import Headline from '../Headline/Headline';
+import Slide from '../Slide/Slide';
 import './PageSlider.scss';
 import Logo from '../../../img/logo.svg';
 

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Formik } from 'formik';
 import axios from 'axios';
 import { SEND_NOTIFICATION, USER_LOGIN_SUCCES } from '../../actions';
-import { Context } from '../../App';
+import { Context } from '../../context/storeContext';
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000/',
