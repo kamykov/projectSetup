@@ -48,16 +48,19 @@ app.use(passport.session());
 // });
 
 // Simple request time logger
+app.use(json()).use(site.routes());
 app.use(function* (next) {
   console.log(`A new request received at ${Date.now()}`);
   console.log(this);
   console.log(process.env.NODE_ENV);
+  if (this.status != 404) return;
+  console.log('Upsss', this.status);
+  this.redirect('/not_found');
 
   // This function call is very important. It tells that more processing is
   // required for the current request and is in the next middleware function/route handler.
   yield next;
 });
-app.use(json()).use(site.routes());
 
 if (process.env.NODE_ENV === 'production') {
   console.log(process.env.NODE_ENV);
@@ -68,6 +71,7 @@ if (process.env.NODE_ENV === 'production') {
       await send(ctx, './Client/dist/index.html');
     } catch (err) {
       // TODO: handle err?
+      console.log('--------------');
       return next();
     }
   });
