@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { injectIntl } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import { Context } from '../../context/storeContext';
 import './Menu.scss';
 
-export function Menu({ intl }) {
+function Menu({ intl }) {
   const {
     store: { menu, isMenuOpen },
     dispatch,
@@ -16,14 +17,14 @@ export function Menu({ intl }) {
     dispatch({ type: 'SWITCH_MENU' });
   }
 
-  const menuItems = menu.map((item, index) => {
+  const menuItems = menu.map((item) => {
     const { title, link } = item;
     const translated = intl.formatMessage({ id: title });
     const half = parseInt(translated.length / 2, 10);
     const [l, r] = [translated.slice(0, half), translated.slice(half)];
 
     return (
-      <li className="menu__element" key={index}>
+      <li className="menu__element" key={item.link}>
         <NavLink
           to={`/slider#${link}`}
           exact
@@ -46,5 +47,9 @@ export function Menu({ intl }) {
     </div>
   );
 }
+
+Menu.propTypes = {
+  intl: intlShape.isRequired,
+};
 
 export default injectIntl(Menu);

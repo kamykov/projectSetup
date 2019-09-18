@@ -12,10 +12,10 @@ import Login from './components/Login/Login';
 import Notifications from './components/Notifications/Notifications';
 
 export default function App() {
-  const { store, dispatch } = useContext(Context);
+  const { store: { lang } } = useContext(Context);
 
   return (
-    <IntlProvider locale={store.lang} messages={translations.pl}>
+    <IntlProvider locale={lang} messages={translations[lang]}>
       <Router>
         <Menu />
         <MainWrapper>

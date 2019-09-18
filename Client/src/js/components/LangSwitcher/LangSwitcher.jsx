@@ -10,7 +10,7 @@ export default function LangSwitcher() {
   const langs = ['pl', 'en'];
 
   const setLang = (newLang) => {
-    dispatch({ type: SET_LANG, newLang });
+    dispatch({ type: SET_LANG, lang: newLang });
   };
 
   const content = langs.map((language) => {

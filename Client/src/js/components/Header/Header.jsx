@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className="header">
-      <button className="header__button" onClick={switchMenu}>
+      <button type="button" className="header__button" onClick={switchMenu}>
         MENU
         {' '}
         <span className="burger" />

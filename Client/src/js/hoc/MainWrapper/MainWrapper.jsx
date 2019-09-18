@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import './MainWrapper.scss';
 import { SET_DOTS } from '../../actions';
 import Canvas from '../Canvas/Canvas';
@@ -25,5 +26,10 @@ function MainWrapper({ children }) {
     </main>
   );
 }
+
+MainWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 
 export default MainWrapper;

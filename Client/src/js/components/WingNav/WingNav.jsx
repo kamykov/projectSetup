@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Context } from '../../context/storeContext';
 import { getCurrentIndex } from '../../utils/helpers';
 
-function WingNav(props) {
+function WingNav({ history, location }) {
   const {
     store: { menu },
   } = useContext(Context);
 
   const [current, setCurrent] = useState(1);
-  const { location: { pathname } } = props;
+  const { pathname } = location;
   const links = menu.map((item) => item.link);
   const [backClasses, forwardClasses] = [
     ['button-wingnav', 'back'],
@@ -25,8 +26,8 @@ function WingNav(props) {
   const goToPage = (e) => {
     const isBack = e.target.classList.contains('back');
     const next = (isBack ? current - 1 : current + 1) % links.length;
-    props.history.push(`/slider#${links[next]}`);
-    props.history.push(`/slider#${links[next]}`);
+    history.push(`/slider#${links[next]}`);
+    history.push(`/slider#${links[next]}`);
     setCurrent(next);
   };
 
@@ -49,5 +50,11 @@ function WingNav(props) {
     </div>
   );
 }
+
+WingNav.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
+
+};
 
 export default withRouter(WingNav);

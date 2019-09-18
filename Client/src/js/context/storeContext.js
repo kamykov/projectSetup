@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import PropTypes from 'prop-types';
 import reducer from '../reducers/storeReducer';
 
 export const initialState = {
@@ -16,12 +17,18 @@ export const initialState = {
 
 export const Context = React.createContext(initialState);
 
-export const StoreProvider = (props) => {
+function StoreProvider({ children }) {
   const [store, dispatch] = useReducer(reducer, initialState);
 
   return (
     <Context.Provider value={{ store, dispatch }}>
-      {props.children}
+      {children}
     </Context.Provider>
   );
+}
+
+StoreProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
+
+export { StoreProvider };

@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { Markup } from 'interweave';
 import axios from 'axios';
@@ -23,19 +24,19 @@ function PageSlider({ location: { hash }, intl }) {
     store: { menu, lang }, dispatch,
   } = useContext(Context);
 
-  const [content, setContent] = useState([]);
+  const [data, setData] = useState([]);
   const [body, setBody] = useState(undefined);
   const current = Math.max(
     0,
     menu.map((item) => item.link).indexOf(hash.substring(1)),
   );
-  const sorted = menu.map((item) => content.find((page) => page.id === item.link));
+  const sorted = menu.map((item) => data.find((page) => page.id === item.link));
 
   useEffect(() => {
     if (storageAvailable('localStorage')) {
-      const lang = localStorage.getItem('lang');
-      const dots = parseInt(localStorage.getItem('dots'));
-      if (lang) dispatch({ type: SET_LANG, lang });
+      const storedLang = localStorage.getItem('lang');
+      const dots = parseInt(localStorage.getItem('dots'), 10);
+      if (storedLang) dispatch({ type: SET_LANG, lang: storedLang });
       if (dots) dispatch({ type: SET_DOTS, value: dots });
     }
     return () => { };
@@ -45,16 +46,15 @@ function PageSlider({ location: { hash }, intl }) {
     instance
       .get('/data')
       .then((res) => {
-        setContent(res.data);
+        setData(res.data);
       })
       .catch((error) => console.log(error));
-
     return () => {
     };
   }, []);
 
   useEffect(() => {
-    if (content.length) {
+    if (data.length) {
       const newBody = sorted.map((page, index) => {
         const {
           title, subtitle, headline, content, translation,
@@ -93,25 +93,27 @@ function PageSlider({ location: { hash }, intl }) {
       setBody(newBody);
     }
     return () => { };
-  }, [content, hash]);
+  }, [data, hash]);
 
   return (
     <div className="page-slider">
       <Logo />
-      {body === undefined ? (
-        <Loading />
-
-      ) : (
-
-        <div className="page-slider__content">{body}</div>
-      )}
+      {body === undefined ? (<Loading />) : (<div className="page-slider__content">{body}</div>)}
     </div>
   );
 }
 
 PageSlider.propTypes = {
-  location: PropTypes.node.isRequired,
-  intl: PropTypes.node.isRequired,
+  location: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+  }),
+  intl: intlShape.isRequired,
+};
+
+PageSlider.defaultProps = {
+  location: PropTypes.shape({
+    hash: '',
+  }),
 };
 
 export default injectIntl(withRouter(PageSlider));

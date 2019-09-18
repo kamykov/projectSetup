@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-use-before-define */
 export function animation(points, ctx, size) {
