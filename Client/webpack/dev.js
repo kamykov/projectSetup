@@ -1,45 +1,40 @@
-const path = require("path");
-const webpack = require("webpack");
-const merge = require("webpack-merge");
-const baseConfig = require("./config.js");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
-const Package = require("../package.json");
-const ROOT_DIR = process.cwd();
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const baseConfig = require('./config.js');
 
 module.exports = merge(baseConfig, {
-  mode: "development",
-  devtool: "source-map",
+  mode: 'development',
+  devtool: 'source-map',
   devServer: {
-    contentBase: "./dist/",
+    contentBase: './dist/',
     port: 3501,
     hot: true,
     open: true,
     watchOptions: {
-      ignored: /(node_modules|dist)/
+      ignored: /(node_modules|dist)/,
     },
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
         use: [
-          { loader: "style-loader" },
+          { loader: 'style-loader' },
           {
-            loader: "css-loader"
+            loader: 'css-loader',
           },
           {
-            loader: "sass-loader"
-          }
-        ]
-      }
-    ]
+            loader: 'sass-loader',
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      __BASE__: JSON.stringify("GLOBAL VAR!!!")
-    })
-  ]
+      __BASE__: JSON.stringify('GLOBAL VAR!!!'),
+    }),
+  ],
 });

@@ -13,17 +13,14 @@ module.exports = function(passport) {
         username: username
       }).then(user => {
         if (!user) {
-          console.log("no user");
           return done(null, false, {
             message: "No user Found"
           });
         }
         // Match
-        console.log(user);
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;
           if (isMatch) {
-            console.log("decrypto", user);
             return done(null, user);
           } else {
             return done(null, false, {

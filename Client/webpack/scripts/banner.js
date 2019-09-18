@@ -1,7 +1,5 @@
-/* eslint-disable prefer-template, no-console */
-const { EOL } = require("os");
-
-const { author, name, version } = require("../../package.json");
+const { EOL } = require('os');
+const { author, name, version } = require('../../package.json');
 
 const date = Date.now();
 

@@ -5,12 +5,11 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
   background: $bgSemiTransparent;
 }
 
 .spinner {
-  margin: 0;
+  margin: 3em 0;
   width: 5.5em;
   height: 5em;
   border: 3px solid transparent;

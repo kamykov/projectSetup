@@ -1,0 +1,65 @@
+# convert line endings to LF in repository and native eof style on specific platform
+*    text=auto
+
+# These files are text and should be normalized (Convert crlf => lf)
+*.bat           text
+*.conf          text
+*.config        text
+*.csv           text
+*.css           text
+*.ctl           text
+*.dat           text
+*.df            text
+*.dtd           text
+*.ejs           text
+*.gradle        text
+*.groovy        text
+*.htm           text
+*.html          text
+*.iml           text
+*.jad           text
+*.java          text
+*.jj            text
+*.js            text eol=lf
+*.json          text
+*.jsp           text
+*.jspf          text
+*.jsx           text eol=lf
+*.launch        text
+*.less          text
+*.md            text
+*.mf            text
+*.pkb           text
+*.pks           text
+*.prefs         text
+*.properties    text
+*.scss          text
+*.sh            text
+*.snap          text
+*.sql           text
+*.svg           text
+*.tld           text
+*.tmpl          text
+*.txt           text
+*.wsdd          text
+*.wsdl          text
+*.xhtml         text
+*.xml           text
+*.xsd           text
+*.xsl           text
+*.xslt          text
+*.yml           text
+
+# These files are binary and should be left untouched (binary is a macro for -text -diff)
+*.dll           binary
+*.eot           binary
+*.gif           binary
+*.ico           binary
+*.jar           binary
+*.jpg           binary
+*.jpeg          binary
+*.png           binary
+*.so            binary
+*.ttf           binary
+*.woff          binary
+*.woff2         binary
