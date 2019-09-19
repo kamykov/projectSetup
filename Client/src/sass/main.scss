@@ -28,8 +28,7 @@ body {
   font-size: 14px;
   color: $textColor;
   background-color: $primaryColor;
-  height: 100%;
-  padding: $gap;
+  max-height: 100%;
 }
 
 a {

@@ -19,9 +19,9 @@ function MainWrapper({ children }) {
   const classes = isMenuOpen ? ['main main--moveout'] : ['main'];
   return (
     <main className={classes}>
-      {children}
       <Canvas dots={dots} />
       <Panel dots={dots} min={3} max={30} onChange={handlerOnChange} />
+      {children}
       <WingNav />
     </main>
   );
