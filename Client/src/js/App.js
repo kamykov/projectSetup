@@ -14,7 +14,6 @@ import Notifications from './components/Notifications/Notifications';
 export default function App() {
   const { store } = useContext(Context);
   const menu = store.menu.map((item) => `/${item.link}`);
-  // console.log(menu);
 
   return (
     <IntlProvider locale={store.lang} messages={translations[store.lang]}>
@@ -27,7 +26,7 @@ export default function App() {
             <Route path="/user/status" component={Profile} />
             <Route path="/not_found" render={() => <h1>OK</h1>} />
             <Route path={menu} component={PageSlider} />
-            {/* <Route path="/" component={PageSlider} /> */}
+            <Route path="/" component={PageSlider} />
           </Switch>
         </MainWrapper>
         <Notifications />
