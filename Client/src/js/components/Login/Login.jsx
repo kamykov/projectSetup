@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
 import axios from 'axios';
 import { SEND_NOTIFICATION, USER_LOGIN_SUCCES } from '../../actions';
 import { Context } from '../../context/storeContext';
+import ErrorValidation from '../ErrorValidation/ErrorValidation';
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000/',
@@ -16,7 +18,7 @@ function Login({ intl, history }) {
   const [type, setType] = useState('login');
   const switchType = () => setType(type === 'login' ? 'register' : 'login');
 
-  function callback(action, values) {
+  function sendData(action, values) {
     return () => {
       instance
         .post(action, values)
@@ -48,26 +50,30 @@ function Login({ intl, history }) {
           password: '',
           passwordConfirm: '',
         }}
+
         validate={(values) => {
           const errors = {};
-          console.log(values);
-          // if (!values.username) {
-          //   errors.username = "Required";
-          // } else if (!(values.username.length > 3)) {
-          //   errors.username = "Validation.usernameToShort";
-          // }
-          // if (values.password) {
-          //   errors.password = "Password Required";
-          // }
+          if (!values.username) {
+            errors.username = 'Validation.Username.Required';
+          } else if (values.username.length < 3) {
+            errors.username = 'Validation.Username.Length';
+          }
+          if (!values.password) {
+            errors.password = 'Validation.Password.Required';
+          }
+          if (type === 'register') {
+            if (!values.passwordConfirm) {
+              errors.passwordConfirm = 'Validation.Password.Required';
+            }
+            if (values.password !== values.passwordConfirm) {
+              errors.passwordConfirm = 'Validation.passwordConfirm.Match';
+            }
+          }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting, submitCount }) => {
+        onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            callback(type, values)();
-            // alert(JSON.stringify(values, null, 2));
-            console.log(JSON.stringify(values, null, 2));
-            console.log(submitCount);
-
+            sendData(type, values)();
             setSubmitting(true);
           }, 400);
         }}
@@ -75,46 +81,44 @@ function Login({ intl, history }) {
         {({
           values,
           errors,
-          touched,
           handleChange,
-          // handleBlur,
+          dirty,
+          isValid,
           handleSubmit,
-          // isSubmitting,
-          /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
             <input
               type="text"
               name="username"
-              value={values.username || ''}
+              value={values.username}
               onChange={handleChange}
               placeholder={intl.formatMessage({ id: 'Auth.Username' })}
             />
-            {errors.username && touched.username && errors.username}
+            <ErrorValidation name="username" errors={errors} />
             <input
               type="password"
               name="password"
-              value={values.password || ''}
+              value={values.password}
               onChange={handleChange}
               placeholder={intl.formatMessage({ id: 'Auth.Password' })}
             />
-            {errors.password && touched.password && errors.password}
+            <ErrorValidation name="password" errors={errors} />
             {type === 'register' && (
-            <input
-              type="password"
-              name="passwordConfirm"
-              value={values.passwordConfirm || ''}
-              onChange={handleChange}
-              placeholder={intl.formatMessage({
-                id: 'Auth.Password2.Placeholder',
-              })}
-            />
+            <>
+              <input
+                type="password"
+                name="passwordConfirm"
+                value={values.passwordConfirm}
+                onChange={handleChange}
+                placeholder={intl.formatMessage({
+                  id: 'Auth.Password2.Placeholder',
+                })}
+              />
+              <ErrorValidation name="passwordConfirm" errors={errors} />
+            </>
             )}
-            {errors.passwordConfirm
-                && touched.passwordConfirm
-                && errors.passwordConfirm}
 
-            <button className="button--primary" type="submit">
+            <button className="button--primary" type="submit" disabled={!dirty || !isValid}>
               <FormattedMessage
                 id={type === 'register' ? 'Auth.Register' : 'Auth.Login'}
                 defaultMessage="Login"

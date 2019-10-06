@@ -23,6 +23,7 @@ export default {
     'Validation.Username.Required': 'Username required',
     'Validation.Username.Length': 'Username should be at least 3 letter long',
     'Validation.Password.Required': 'Password is required',
+    'Validation.passwordConfirm.Match': "Passwords don't match",
     'Auth.Register.Passwords.Error': 'Passwords must be the same',
     'Auth.Register.Succes': 'Register successed!',
     'Panel.Dots': 'Dots',
@@ -52,6 +53,7 @@ export default {
     'Validation.Username.Length':
       'Nazwa użytkownika musi składać się z conajmniej 3 znaków',
     'Validation.Password.Required': 'Hasło jest wymagane',
+    'Validation.passwordConfirm.Match': 'Hasła nie są takie same',
     'Auth.Register.Passwords.Error': 'Hasła muszą być takie same',
     'Auth.Register.Succes': 'Rejestracja udana!',
     'Panel.Dots': 'Kropki',

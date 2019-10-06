@@ -19,7 +19,7 @@ const instance = axios.create({
   baseURL: 'http://localhost:3000/',
 });
 
-function PageSlider({ location: { hash }, intl }) {
+function PageSlider({ location: { pathname }, intl }) {
   const {
     store: { menu, lang }, dispatch,
   } = useContext(Context);
@@ -28,7 +28,7 @@ function PageSlider({ location: { hash }, intl }) {
   const [body, setBody] = useState(undefined);
   const current = Math.max(
     0,
-    menu.map((item) => item.link).indexOf(hash.substring(1)),
+    menu.map((item) => item.link).indexOf(pathname.substring(1)),
   );
   const sorted = menu.map((item) => data.find((page) => page.id === item.link));
 
@@ -93,7 +93,7 @@ function PageSlider({ location: { hash }, intl }) {
       setBody(newBody);
     }
     return () => { };
-  }, [data, hash, lang]);
+  }, [data, pathname, lang]);
 
   return (
     <div className="page-slider">
@@ -105,14 +105,14 @@ function PageSlider({ location: { hash }, intl }) {
 
 PageSlider.propTypes = {
   location: PropTypes.shape({
-    hash: PropTypes.string.isRequired,
+    pathname: PropTypes.string.isRequired,
   }),
   intl: intlShape.isRequired,
 };
 
 PageSlider.defaultProps = {
   location: PropTypes.shape({
-    hash: '',
+    pathname: '',
   }),
 };
 

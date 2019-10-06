@@ -16,6 +16,7 @@
   @include button;
   &--primary {
     @extend .button;
+    margin-top: 1em;
     color: $textColorLight;
     background: $primaryStrong;
     &:hover {
@@ -27,6 +28,9 @@
     }
     &:focus {
       outline: 1px solid red;
+    }
+    &:disabled {
+      background: $primaryMute;
     }
   }
   &--custom {

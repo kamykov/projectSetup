@@ -3,7 +3,10 @@ export const isEmpty = (value) => value === undefined
   || (typeof value === 'object' && Object.keys(value).length === 0)
   || (typeof value === 'string' && value.trim().length === 0);
 
-export const getCurrentIndex = (links, path) => Math.max(0, links.indexOf(path.substring(1)));
+export const getCurrentIndex = (links, path) => {
+  console.log(links, path);
+  return Math.max(0, links.indexOf(path.substring(1)) + 1);
+};
 
 export const storageAvailable = (type) => {
   let storage;
