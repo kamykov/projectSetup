@@ -13,6 +13,7 @@
 
   &__content {
     display: flex;
+    margin-top: 2rem;
     margin-left: -100vw;
   }
   &__page {
@@ -48,6 +49,7 @@
 }
 
 .page__title {
+  margin-bottom: $gap * 4;
   text-shadow: $textShadow;
   font-weight: bold;
   text-transform: uppercase;

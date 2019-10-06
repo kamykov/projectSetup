@@ -16,7 +16,7 @@ function MainWrapper({ children }) {
   const handlerOnChange = ({ target: { value } }) => {
     dispatch({ type: SET_DOTS, value: parseInt(value, 10) });
   };
-  const classes = isMenuOpen ? ['main main--moveout'] : ['main'];
+  const classes = isMenuOpen ? 'main main--moveout' : 'main';
   return (
     <main className={classes}>
       <Canvas dots={dots} />
