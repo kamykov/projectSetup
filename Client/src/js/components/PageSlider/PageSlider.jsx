@@ -95,8 +95,13 @@ function PageSlider({ location: { pathname }, intl }) {
     return () => { };
   }, [data, pathname, lang]);
 
+  const onWheelHandler = (e) => {
+    console.log(e);
+    console.log(e.deltaY);
+  };
+
   return (
-    <div className="page-slider">
+    <div className="page-slider" onWheel={onWheelHandler}>
       <Logo />
       {body === undefined ? (<Loading />) : (<div className="page-slider__content">{body}</div>)}
     </div>
