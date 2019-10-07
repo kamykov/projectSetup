@@ -1,6 +1,6 @@
 {
   "name": "projectsetup",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Krzysztof Kamieniecki Think Studio",
   "main": "index.js",
   "proxy": "http://localhost:3000/",
