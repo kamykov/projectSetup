@@ -4,14 +4,10 @@ import React, { useContext, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
-import axios from 'axios';
+import { apiRequest } from '../../utils/apiRequest';
 import { SEND_NOTIFICATION, USER_LOGIN_SUCCES } from '../../actions';
 import { Context } from '../../context/storeContext';
 import ErrorValidation from '../ErrorValidation/ErrorValidation';
-
-const instance = axios.create({
-  baseURL: 'http://localhost:3000/',
-});
 
 function Login({ intl, history }) {
   const { dispatch } = useContext(Context);
@@ -20,7 +16,7 @@ function Login({ intl, history }) {
 
   function sendData(action, values) {
     return () => {
-      instance
+      apiRequest
         .post(action, values)
         .then((response) => {
           dispatch({

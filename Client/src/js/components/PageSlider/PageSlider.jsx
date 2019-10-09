@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { Markup } from 'interweave';
-import axios from 'axios';
+import { apiRequest } from '../../utils/apiRequest';
 import { Context } from '../../context/storeContext';
 import Headline from '../Headline/Headline';
 import Slide from '../Slide/Slide';
@@ -14,10 +14,6 @@ import Logo from '../../../img/logo.svg';
 import { storageAvailable } from '../../utils/helpers';
 
 import { SET_LANG, SET_DOTS } from '../../actions';
-
-const instance = axios.create({
-  baseURL: 'http://localhost:3000/',
-});
 
 function PageSlider({ location: { pathname }, intl }) {
   const {
@@ -43,7 +39,7 @@ function PageSlider({ location: { pathname }, intl }) {
   }, []);
 
   useEffect(() => {
-    instance
+    apiRequest
       .get('/data')
       .then((res) => {
         setData(res.data);
@@ -95,9 +91,8 @@ function PageSlider({ location: { pathname }, intl }) {
     return () => { };
   }, [data, pathname, lang]);
 
-  const onWheelHandler = (e) => {
-    console.log(e);
-    console.log(e.deltaY);
+  const onWheelHandler = () => {
+
   };
 
   return (

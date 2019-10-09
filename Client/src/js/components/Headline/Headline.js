@@ -4,7 +4,7 @@ import './Headline.scss';
 
 import { setTimeout } from 'timers';
 
-export default function Headline({ children, delay = 60 }) {
+export default function Headline({ children, delay }) {
   const [classes, setClasses] = useState('letter');
 
   useEffect(() => {
@@ -32,5 +32,8 @@ export default function Headline({ children, delay = 60 }) {
 
 Headline.propTypes = {
   children: PropTypes.node.isRequired,
-  delay: PropTypes.number.isRequired,
+  delay: PropTypes.number,
+};
+Headline.defaultProps = {
+  delay: 60,
 };

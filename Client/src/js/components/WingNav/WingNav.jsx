@@ -23,14 +23,10 @@ function WingNav({ history, location }) {
     setCurrent(getCurrentIndex(links, pathname));
   }, []);
 
-  // console.log(current, pathname);
   const goToPage = (e) => {
     setCurrent(getCurrentIndex(links, pathname));
-    console.log(current, pathname);
     const isBack = e.target.classList.contains('back');
     const next = (isBack ? current - 1 : current + 1) % links.length;
-    console.log(next);
-    history.push(`/${links[next]}`);
     history.push(`/${links[next]}`);
     setCurrent(next);
   };
