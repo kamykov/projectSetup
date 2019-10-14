@@ -20,8 +20,11 @@ module.exports = {
   },
   plugins: [
     'react',
+    'react-hooks'
   ],
   rules: {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react-hooks/rules-of-hooks": "error", // Sprawdza stosowanie zasad hooków
+    "react-hooks/exhaustive-deps": "warn" // Sprawdza zależności efektów
   },
 };

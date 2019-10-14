@@ -67,5 +67,7 @@
     "webpack-merge": "^4.2.1",
     "yargs": "^13.3.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^2.1.2"
+  }
 }
