@@ -1,0 +1,8 @@
+.typing {
+  color: $textColor;
+  position: absolute;
+  top: 20%;
+  left:5%;
+  z-index: -10;
+  transform: rotate(15deg)
+}
