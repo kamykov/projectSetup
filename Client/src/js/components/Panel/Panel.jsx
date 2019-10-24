@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import './Panel.scss';
 
 export default function Panel({
@@ -16,12 +15,6 @@ export default function Panel({
         value={dots}
         onChange={onChange}
       />
-      <div>
-        <FormattedMessage id="Panel.Dots" defaultMessage="Dots" />
-        :
-        {' '}
-        {dots}
-      </div>
     </div>
   );
 }
@@ -34,7 +27,7 @@ Panel.propTypes = {
 };
 Panel.defaultProps = {
   max: 30,
-  min: 1,
+  min: 0,
   dots: 5,
   onChange: () => {},
 };

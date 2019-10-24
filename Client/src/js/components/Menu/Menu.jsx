@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { injectIntl, intlShape } from 'react-intl';
 import { Context } from '../../context/storeContext';
-import Typing from '../Typing/Typing';
+// import Typing from '../Typing/Typing';
 import './Menu.scss';
 
 function Menu({ intl }) {
@@ -43,7 +43,7 @@ function Menu({ intl }) {
 
   return (
     <div className={classes.join(' ')}>
-      <Typing delay={1000} />
+      {/* <Typing delay={1000} /> */}
       <button type="button" className="menu__button" onClick={handleClick} />
       <ul className="menu__list">{menuItems}</ul>
     </div>

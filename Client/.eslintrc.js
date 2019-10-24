@@ -25,6 +25,7 @@ module.exports = {
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react-hooks/rules-of-hooks": "error", // Sprawdza stosowanie zasad hooków
-    "react-hooks/exhaustive-deps": "warn" // Sprawdza zależności efektów
+    "react-hooks/exhaustive-deps": "warn", // Sprawdza zależności efektów
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
   },
 };

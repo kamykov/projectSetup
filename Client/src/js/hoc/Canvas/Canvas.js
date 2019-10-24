@@ -10,6 +10,7 @@ function Canvas({
   color,
   stroke,
   dots,
+  lines,
 }) {
   let ctx;
   const size = useWindowSize();
@@ -20,18 +21,22 @@ function Canvas({
   const canvasRef = useRef();
 
   useEffect(() => {
-    const newPoints = allPoints.slice(0, dots);
+    const newPoints = allPoints.slice(0, dots + 3);
     setPoints(newPoints);
     return () => { };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dots, size]);
 
   function updateAnimationState() {
     lib.clearCanvas(size, ctx);
     lib.findClosest(points);
     points.forEach((point) => {
-      lib.drawLine(ctx, point, points[point.closest[1].index]);
-      lib.drawLine(ctx, point, points[point.closest[2].index]);
-      lib.drawLine(ctx, point, points[point.closest[3].index]);
+      let i;
+      for (i = 1; i <= lines; i++) {
+        if (point.closest[i]) {
+          lib.drawLine(ctx, point, points[point.closest[i].index]);
+        }
+      }
       lib.drawCircle(ctx, point, 5, color);
       lib.update2(point, size);
     });
@@ -52,7 +57,6 @@ function Canvas({
     };
   }, [dots, size]);
 
-
   return (
     <div className="wrapper" ref={wrapperRef}>
       <canvas className="wrapper__canvas" ref={canvasRef} />
@@ -63,11 +67,13 @@ Canvas.propTypes = {
   color: PropTypes.string,
   stroke: PropTypes.string,
   dots: PropTypes.number,
+  lines: PropTypes.number,
 };
 Canvas.defaultProps = {
   color: 'rgba(255,0,0, .5)',
   stroke: 'rgba(200,200,200, .5)',
   dots: 12,
+  lines: 3,
 };
 
 export default Canvas;
