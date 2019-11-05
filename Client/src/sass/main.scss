@@ -31,6 +31,8 @@ body {
   max-height: 100%;
 }
 
+::selection {background:$primaryRed;}
+
 a {
   color: $primaryColor;
   &:hover {

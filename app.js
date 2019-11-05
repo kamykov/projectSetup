@@ -1,7 +1,10 @@
+require('dotenv').config();
+const fs = require('fs');
 const serve = require('koa-static');
 const sendfile = require('koa-sendfile');
 const Koa = require('koa');
 const mongoose = require('mongoose');
+const morgan = require('koa-morgan');
 const bodyParser = require('koa-bodyparser');
 const json = require('koa-json');
 const cors = require('@koa/cors');
@@ -13,17 +16,15 @@ const Router = require('koa-router');
 const router = new Router();
 const PORT = process.env.PORT || 3000;
 
+const accessLogStream = fs.createWriteStream(`${__dirname}/access.log`, { flags: 'a' });
 const app = new Koa();
 const site = require('./routes/site');
 require('./auth/auth')(passport);
 
-// mongodb://boss:bossek1@ds213178.mlab.com:13178/tsdb
-// mongodb://localhost/tsDB
+app.use(morgan('combined', { stream: accessLogStream }));
 
 mongoose
-  .connect('mongodb://boss:bossek1@ds213178.mlab.com:13178/tsdb', {
-    useNewUrlParser: true,
-  })
+  .connect(process.env.DATABASE, { useNewUrlParser: true })
   .then(() => console.log('Now connected to MongoDB!'))
   .catch((err) => console.error('Something went wrong', err));
 mongoose.set('debug', true);
@@ -38,22 +39,10 @@ app.use(cors());
 app.use(session({}, app));
 app.use(passport.initialize());
 app.use(passport.session());
-
-// app.use(async ctx => {
-//   console.log(ctx.isAuthenticated());
-//   console.log(ctx.isUnauthenticated());
-//   //await ctx.login();
-//   //ctx.logout();
-//   console.log("user", ctx.state.user);
-// });
-
-// Simple request time logger
 app.use(json()).use(site.routes());
 
 
 if (process.env.NODE_ENV === 'production') {
-  console.log(process.env.NODE_ENV);
-  console.log('jest produkcja ... .');
   app.use(serve('./Client/dist'));
   router.get('*', async (ctx, next) => {
     try {
@@ -67,9 +56,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(function* (next) {
-  console.log(`A new request received at ${Date.now()}`);
   console.log(this);
-  console.log(process.env.NODE_ENV);
   if (this.status != 404) return;
   console.log('Upsss', this.status);
   this.redirect('/not_found');

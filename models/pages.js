@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
@@ -10,7 +10,7 @@ const pageSchema = new mongoose.Schema({
   headline: String,
   img: String,
   content: { type: Map, of: String },
-  date: Date
+  date: Date,
 });
 
-module.exports = Page = mongoose.model("Page", pageSchema);
+module.exports = mongoose.model('Page', pageSchema);

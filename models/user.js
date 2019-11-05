@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
-  date: Date
-});
+  date: Date,
+}, { timestamps: true });
 
-module.exports = User = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

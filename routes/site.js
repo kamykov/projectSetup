@@ -1,16 +1,14 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-undef */
+
 const Router = require('koa-router');
 
 const router = new Router();
 const mongo = require('koa-mongo');
-// const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 const passport = require('koa-passport');
-
-// import User from "../models/User";
+const User = require('../models/user');
 const Page = require('../models/pages');
-// const User = mongoose.model("User");
 const validateLoginInput = require('../validation/login');
 const validateRegisterInput = require('../validation/register');
 

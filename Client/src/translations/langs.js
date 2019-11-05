@@ -19,7 +19,7 @@ export default {
     'Content.Training': 'Trainings',
     'Content.Contact': 'Contact',
     'Content.Call': 'Call me',
-    'Content.Headline': 'Creation and development of websites',
+    'Content.Headline': 'Creation and Evolution',
     'Validation.Username.Required': 'Username required',
     'Validation.Username.Length': 'Username should be at least 3 letter long',
     'Validation.Password.Required': 'Password is required',
@@ -48,7 +48,7 @@ export default {
     'Content.Training': 'Szkolenia',
     'Content.Contact': 'Kontakt',
     'Content.Call': 'Dzwoń',
-    'Content.Headline': 'Tworzenie i rozwój stron internetowych',
+    'Content.Headline': 'Tworzenie i rozwój',
     'Validation.Username.Required': 'Nazwa użytkownika jest wymagana',
     'Validation.Username.Length':
       'Nazwa użytkownika musi składać się z conajmniej 3 znaków',
