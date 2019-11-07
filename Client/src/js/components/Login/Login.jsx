@@ -19,6 +19,7 @@ function Login({ intl, history }) {
       apiRequest
         .post(action, values)
         .then((response) => {
+          console.log(response.data);
           dispatch({
             type:
             response.status < 204

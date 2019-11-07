@@ -18,7 +18,8 @@ const PORT = process.env.PORT || 3000;
 
 const accessLogStream = fs.createWriteStream(`${__dirname}/access.log`, { flags: 'a' });
 const app = new Koa();
-const site = require('./routes/site');
+const siteRoutes = require('./routes/site');
+const authRoutes = require('./routes/auth');
 require('./auth/auth')(passport);
 
 app.use(morgan('combined', { stream: accessLogStream }));
@@ -26,7 +27,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 mongoose
   .connect(process.env.DATABASE, { useNewUrlParser: true })
   .then(() => console.log('Now connected to MongoDB!'))
-  .catch((err) => console.error('Something went wrong', err));
+  .catch((err) => console.error('Something went wrong with connection to Database', err));
 mongoose.set('debug', true);
 mongoose.connection.once('open', () => {
   console.log('connected to database');
@@ -39,7 +40,12 @@ app.use(cors());
 app.use(session({}, app));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(json()).use(site.routes());
+app.use(json()).use(siteRoutes.routes());
+app.use(json()).use(authRoutes.routes());
+
+app.use(async (ctx) => {
+  console.log('ctx.state.user', ctx.state.user);
+});
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -54,6 +60,7 @@ if (process.env.NODE_ENV === 'production') {
     }
   });
 }
+
 
 app.use(function* (next) {
   console.log(this);
