@@ -27,6 +27,7 @@ exports.login = async (ctx) => {
 };
 
 exports.logout = (ctx) => {
+  console.log('get logout');
   ctx.logout();
   ctx.redirect('/');
 };
@@ -66,6 +67,5 @@ exports.isAuthenticated = (ctx, next) => {
     return next();
   }
   ctx.body = 'Lippppa';
-  ctx.res.status(401).json({ error: 'Not Authenticated' });
-  next();
+  ctx.body = ({ error: 'Not Authenticated' });
 };

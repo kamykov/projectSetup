@@ -20,6 +20,7 @@ const accessLogStream = fs.createWriteStream(`${__dirname}/access.log`, { flags:
 const app = new Koa();
 const siteRoutes = require('./routes/site');
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 require('./auth/auth')(passport);
 
 app.use(morgan('combined', { stream: accessLogStream }));
@@ -29,9 +30,7 @@ mongoose
   .then(() => console.log('Now connected to MongoDB!'))
   .catch((err) => console.error('Something went wrong with connection to Database', err));
 mongoose.set('debug', true);
-mongoose.connection.once('open', () => {
-  console.log('connected to database');
-});
+mongoose.connection.once('open', () => { console.log('connected to database'); });
 
 app.keys = ['secret'];
 app.use(bodyParser());
@@ -40,12 +39,10 @@ app.use(cors());
 app.use(session({}, app));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(json()).use(userRoutes.routes());
 app.use(json()).use(siteRoutes.routes());
 app.use(json()).use(authRoutes.routes());
-
-app.use(async (ctx) => {
-  console.log('ctx.state.user', ctx.state.user);
-});
+app.use(userRoutes.allowedMethods());
 
 
 if (process.env.NODE_ENV === 'production') {
