@@ -69,3 +69,12 @@ exports.isAuthenticated = (ctx, next) => {
   ctx.body = 'Lippppa';
   ctx.body = ({ error: 'Not Authenticated' });
 };
+
+exports.isAdmin = (ctx, next) => {
+  if (ctx.profile && ctx.profile.role === 1) {
+    return next();
+  }
+  ctx.body = ({
+    error: 'Admin resource! Access denied',
+  });
+};
