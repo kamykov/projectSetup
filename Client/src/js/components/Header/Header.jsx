@@ -12,7 +12,6 @@ export default function Header() {
     <header className="header">
       <button type="button" className="header__button" onClick={switchMenu}>
         MENU
-        {' '}
         <span className="burger" />
       </button>
       <div>

@@ -21,12 +21,6 @@
     display: flex;
     padding: $gap 1em $gap 5.5em;
 
-    @each $type, $color in $types {
-      &.#{$type} {
-        //border-left: 2em solid $color;
-      }
-    }
-
     &:after {
       @include pseudoElement(100%);
       font-family: "TS-icons", serif;
