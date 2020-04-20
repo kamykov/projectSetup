@@ -13,14 +13,14 @@ function MainWrapper({ children }) {
     dispatch,
   } = useContext(Context);
 
-  const handlerOnChange = ({ target: { value } }) => {
+  const OnChange = ({ target: { value } }) => {
     dispatch({ type: SET_DOTS, value: parseInt(value, 10) });
   };
   const classes = isMenuOpen ? 'main main--moveout' : 'main';
   return (
     <main className={classes}>
       <Canvas dots={dots} />
-      <Panel dots={dots} onChange={handlerOnChange} />
+      <Panel dots={dots} onChange={OnChange} />
       {children}
       <WingNav />
     </main>

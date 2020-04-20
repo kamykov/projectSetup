@@ -1,0 +1,6 @@
+
+p {
+    @include mq($x-small) {
+    font-size: .82rem;
+  }
+}

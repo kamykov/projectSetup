@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Panel.scss';
 
 export default function Panel({
   max, min, dots, onChange,
