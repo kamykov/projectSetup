@@ -4,16 +4,15 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { Markup } from 'interweave';
-import { apiRequest } from '../../utils/apiRequest';
-import { Context } from '../../context/storeContext';
-import Headline from '../Headline/Headline';
+import { storageAvailable } from 'utils/helpers';
+import { apiRequest } from 'utils/apiRequest';
+import { Context } from 'context/storeContext';
+import { SET_LANG, SET_DOTS } from 'actions';
+import Headline from 'components/Headline/Headline';
 import Slide from '../Slide/Slide';
 import Loading from '../Loading/Loading';
-import './PageSlider.scss';
 import Logo from '../../../img/logo.svg';
-import { storageAvailable } from '../../utils/helpers';
-
-import { SET_LANG, SET_DOTS } from '../../actions';
+import './PageSlider.scss';
 
 function PageSlider({ location: { pathname }, intl }) {
   const {
@@ -70,7 +69,7 @@ function PageSlider({ location: { pathname }, intl }) {
             {index === current && (
               <>
                 <h1 className="page__title">
-                  {<Headline>{titleTranslation}</Headline>}
+                  <Headline>{titleTranslation}</Headline>
                 </h1>
                 <h2 className="page__subtitle">
                   {subtitle && <Headline>{subtitle}</Headline>}

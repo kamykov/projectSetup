@@ -7,7 +7,6 @@ import {
 } from '../actions';
 
 export default (state, action) => {
-  console.log(action.type);
   switch (action.type.substring(0, action.type.indexOf(':')) || action.type) {
     case SWITCH_MENU:
       return { ...state, isMenuOpen: !state.isMenuOpen };

@@ -21,12 +21,16 @@ module.exports = {
   },
   plugins: [
     'react',
+    'react-hooks'
   ],
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
   },
   settings: {
     "import/resolver": {
+      webpack: {
+        config: 'Client/webpack/config.js',
+      },
       node: {
         extensions: [".js", ".jsx"]
       }

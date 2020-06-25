@@ -1,5 +1,5 @@
 const { EOL } = require('os');
-const { author, name, version } = require('../../package.json');
+const { author, name, version } = require('../../../package');
 
 const date = Date.now();
 

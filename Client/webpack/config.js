@@ -4,15 +4,18 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const banner = require('./scripts/banner');
-const Package = require('../package.json');
+const Package = require('../../package.json');
 
 const ROOT_DIR = process.cwd();
 
 module.exports = {
-  entry: ['./src/js/index.js', './src/sass/main.scss'],
+  entry: [
+    `${path.resolve(ROOT_DIR, 'Client/src/js/index.js')}`,
+    `${path.resolve(ROOT_DIR, 'Client/src/sass/main.scss')}`,
+  ],
   output: {
     filename: 'js/main.js',
-    path: path.join(process.cwd(), 'dist'),
+    path: path.join(ROOT_DIR, 'dist'),
     publicPath: '/',
   },
   module: {
@@ -53,8 +56,14 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
-    modules: ['node_modules'],
+    extensions: ['.js', '.jsx', '.json'],
+    modules: ['node_modules', path.resolve(__dirname, 'Client/src/js')],
+    alias: {
+      components: path.resolve(ROOT_DIR, 'Client/src/js/components'),
+      utils: path.resolve(ROOT_DIR, 'Client/src/js/utils'),
+      context: path.resolve(ROOT_DIR, 'Client/src/js/context'),
+      actions: path.resolve(ROOT_DIR, 'Client/src/js/actions'),
+    },
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -62,9 +71,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: Package.description,
       // inject: false,
-      template: path.join(ROOT_DIR, 'src', 'templates', 'index.ejs'),
+      template: path.join(ROOT_DIR, 'Client', 'src', 'templates', 'index.ejs'),
       // template: require("html-webpack-template"),
-      favicon: path.resolve(ROOT_DIR, 'src', 'img', 'favicon.ico'),
+      favicon: path.resolve(ROOT_DIR, 'Client', 'src', 'img', 'favicon.ico'),
       meta: [
         {
           name: 'viewport',

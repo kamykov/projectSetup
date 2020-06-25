@@ -32,7 +32,7 @@ function Canvas({
     lib.findClosest(points);
     points.forEach((point) => {
       let i;
-      for (i = 1; i <= lines; i++) {
+      for (i = 1; i <= lines; i += 1) {
         if (point.closest[i]) {
           lib.drawLine(ctx, point, points[point.closest[i].index]);
         }

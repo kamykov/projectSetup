@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { injectIntl, intlShape } from 'react-intl';
-import { Context } from '../../context/storeContext';
+import { Context } from 'context/storeContext';
 // import Typing from '../Typing/Typing';
 import './Menu.scss';
 

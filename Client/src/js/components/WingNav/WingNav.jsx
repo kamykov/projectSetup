@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Context } from '../../context/storeContext';
-import { getCurrentIndex } from '../../utils/helpers';
+import { Context } from 'context/storeContext';
+import { getCurrentIndex } from 'utils/helpers';
 
 function WingNav({ history, location }) {
   const {
