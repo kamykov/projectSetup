@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const banner = require('./scripts/banner');
 const Package = require('../../package.json');
@@ -69,20 +70,44 @@ module.exports = {
     new CleanWebpackPlugin(),
     new webpack.BannerPlugin({ banner }),
     new HtmlWebpackPlugin({
-      title: Package.description,
+      title: Package.author,
       // inject: false,
       template: path.join(ROOT_DIR, 'Client', 'src', 'templates', 'index.ejs'),
       // template: require("html-webpack-template"),
       favicon: path.resolve(ROOT_DIR, 'Client', 'src', 'img', 'favicon.ico'),
-      meta: [
-        {
-          name: 'viewport',
-          content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-        },
-      ],
+      meta: {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+      },
       googleAnalytics: {
         trackingId: 'UA-61042044-1',
         pageViewOnLoad: true,
+      },
+    }),
+    new FaviconsWebpackPlugin({
+      logo: './Client/src/img/logo.svg',
+      favicons: {
+        appName: 'Think Studio',
+        appShortName: 'TS',
+        appDescription: 'Krzysztof Kamieniecki webdeveloper',
+        developerName: 'Krzysztof Kamieniecki',
+        lang: 'en-US',
+        background: '#f9f8f0',
+        theme_color: '#ec450b',
+        display: 'standalone',
+        appleStatusBarStyle: 'black-translucent',
+        orientation: 'any',
+        start_url: '/',
+        icons: {
+          android: true,
+          appleIcon: true,
+          appleStartup: true,
+          coast: true,
+          favicons: true,
+          firefox: true,
+          windows: true,
+          yandex: true,
+        },
       },
     }),
   ],
