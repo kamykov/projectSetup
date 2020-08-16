@@ -10,4 +10,6 @@ import App from './App';
 
 addLocaleData([...en, ...pl]);
 
+console.log('Hello devs! 😎');
+
 Reactdom.render(<StoreProvider><App /></StoreProvider>, document.getElementById('app'));

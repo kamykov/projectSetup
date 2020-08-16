@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from 'context/storeContext';
-import Submenu from 'components/Submenu/Submenu';
+// import Submenu from 'components/Submenu/Submenu';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import './Header.scss';
 
@@ -15,7 +15,7 @@ export default function Header() {
         <span className="burger" />
       </button>
       <div>
-        <Submenu />
+        {/* <Submenu /> */}
         <LangSwitcher />
       </div>
     </header>

@@ -66,7 +66,6 @@ exports.isAuthenticated = (ctx, next) => {
   if (ctx.isAuthenticated()) {
     return next();
   }
-  ctx.body = 'Lippppa';
   ctx.body = ({ error: 'Not Authenticated' });
 };
 

@@ -24,6 +24,7 @@ const userRoutes = require('./routes/user');
 require('./auth/auth')(passport);
 
 app.use(morgan('combined', { stream: accessLogStream }));
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 mongoose
   .connect(process.env.DATABASE, { useNewUrlParser: true })
@@ -32,6 +33,7 @@ mongoose
 mongoose.set('debug', true);
 mongoose.connection.once('open', () => { console.log('connected to database'); });
 
+
 app.keys = ['secret'];
 app.use(bodyParser());
 app.use(cors());
@@ -39,29 +41,20 @@ app.use(cors());
 app.use(session({}, app));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(json()).use(userRoutes.routes());
 app.use(json()).use(siteRoutes.routes());
+app.use(json()).use(userRoutes.routes());
 app.use(json()).use(authRoutes.routes());
 app.use(userRoutes.allowedMethods());
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(serve('./Client/dist'));
-  router.get('*', async (ctx, next) => {
-    try {
-      await send(ctx, './Client/dist/index.html');
-    } catch (err) {
-      // TODO: handle err?
-      console.log('--------------');
-      return next();
-    }
-  });
 }
 
 
 app.use(function* (next) {
-  console.log(this);
-  if (this.status != 404) return;
+  if (this.status !== 404) return;
   console.log('Upsss', this.status);
   this.redirect('/not_found');
 
