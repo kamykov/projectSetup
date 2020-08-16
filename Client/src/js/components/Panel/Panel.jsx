@@ -28,5 +28,5 @@ Panel.defaultProps = {
   max: 30,
   min: 0,
   dots: 5,
-  onChange: () => {},
+  onChange: () => { },
 };

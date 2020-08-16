@@ -21,7 +21,6 @@ describe('Panel Testing', () => {
 
   beforeEach(() => {
     wrapper = setup();
-    console.log(wrapper.debug());
   });
 
   it('should render', () => {
@@ -35,7 +34,9 @@ describe('Panel Testing', () => {
   });
 
   it('Should have dots property', () => {
-    expect(wrapper.props().dots).toBe(12);
+    wrapper = setup({ props: 13 });
+    console.log(wrapper);
+    expect(wrapper.props().dots).toBe(13);
   });
 
   it('should call props.onChange on change', () => {
@@ -51,16 +52,8 @@ describe('Panel Testing', () => {
     expect(wrapper.find("input[type='range']").exists()).toBe(true);
   });
 
-  it('Renders a Panel component based on state', () => {
-    wrapper.setState({ dots: 22 });
-
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
-
   it('Should change a dots props', () => {
-    wrapper
-      .find("input[type='range']")
-      .simulate('change', { target: { value: 25 } });
-    expect(wrapper.props().dots).toBe(25);
+    wrapper.find("input[type='range']").simulate('change', { target: { value: 25 } });
+    expect(wrapper.props().onChange).toHaveBeenCalled();
   });
 });
