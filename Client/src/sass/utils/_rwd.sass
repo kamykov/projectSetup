@@ -1,0 +1,12 @@
+@mixin small
+  @media (max-width: $small)
+    @content
+@mixin mobile
+  @media (max-width: $mobile)
+    @content
+@mixin medium
+  @media (max-width: $medium)
+    @content
+@mixin desktop
+  @media (min-width: $desktop)
+    @content

@@ -18,19 +18,26 @@ const PORT = process.env.PORT || 3000;
 
 const accessLogStream = fs.createWriteStream(`${__dirname}/access.log`, { flags: 'a' });
 const app = new Koa();
-const site = require('./routes/site');
+const siteRoutes = require('./routes/site');
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 require('./auth/auth')(passport);
 
 app.use(morgan('combined', { stream: accessLogStream }));
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 mongoose
   .connect(process.env.DATABASE, { useNewUrlParser: true })
   .then(() => console.log('Now connected to MongoDB!'))
-  .catch((err) => console.error('Something went wrong', err));
+  .catch((err) => console.error('Something went wrong with connection to Database', err));
 mongoose.set('debug', true);
-mongoose.connection.once('open', () => {
-  console.log('connected to database');
-});
+mongoose.connection.once('open', () => { console.log('connected to database'); });
+
+
+// app.use((ctx, next) => {
+//   console.log(ctx.request);
+//   return next();
+// });
 
 app.keys = ['secret'];
 app.use(bodyParser());
@@ -39,8 +46,12 @@ app.use(cors());
 app.use(session({}, app));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(json()).use(site.routes());
+app.use(json()).use(siteRoutes.routes());
+app.use(json()).use(userRoutes.routes());
+app.use(json()).use(authRoutes.routes());
+app.use(userRoutes.allowedMethods());
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(serve('./Client/dist'));
@@ -55,9 +66,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+
 app.use(function* (next) {
-  console.log(this);
-  if (this.status != 404) return;
+  // console.log(this);
+  if (this.status !== 404) return;
   console.log('Upsss', this.status);
   this.redirect('/not_found');
 

@@ -1,0 +1,33 @@
+a {
+
+}
+
+a {
+  &.social {
+    margin: 2rem;
+    position: relative;
+    width: 60px;
+    display:inline-block;
+    color: $textColor;
+    cursor: pointer;
+    
+    &:hover {
+      color: $primaryColor;
+    }
+    &:after {
+      @include pseudoElement(60px);
+      font-family: "TS-icons", serif;
+      font-size: 1.5rem;
+      width: 2.5em;
+    }
+    @each $type, $icon in $social-icons {
+      &.#{$type}:after {
+        content: $icon;
+      }
+    }
+
+  }
+   
+}
+
+  

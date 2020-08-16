@@ -1,5 +1,4 @@
 /* eslint-disable linebreak-style */
-const webpack = require('webpack');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./config.js');

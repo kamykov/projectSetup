@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import React, { useContext, useState, Fragment } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
-import { apiRequest } from '../../utils/apiRequest';
-import { SEND_NOTIFICATION, USER_LOGIN_SUCCES } from '../../actions';
-import { Context } from '../../context/storeContext';
-import ErrorValidation from '../ErrorValidation/ErrorValidation';
+import ErrorValidation from 'components/ErrorValidation/ErrorValidation';
+import { apiRequest } from 'utils/apiRequest';
+import { SEND_NOTIFICATION, USER_LOGIN_SUCCES } from 'actions';
+import { Context } from 'context/storeContext';
 
 function Login({ intl, history }) {
   const { dispatch } = useContext(Context);
@@ -19,6 +19,7 @@ function Login({ intl, history }) {
       apiRequest
         .post(action, values)
         .then((response) => {
+          console.log(response.data);
           dispatch({
             type:
             response.status < 204

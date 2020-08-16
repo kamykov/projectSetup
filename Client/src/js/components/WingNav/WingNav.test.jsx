@@ -9,7 +9,7 @@ describe('WingNav testing', () => {
 
   beforeEach(() => {
     const setRouteLeaveHook = jest.fn();
-    wrapper = shallow(<WingNav params={{router: setRouteLeaveHook }} />)
+    wrapper = shallow(<WingNav params={router: setRouteLeaveHook } />);
     console.dir(wrapper.debug())
   });
 
@@ -23,5 +23,3 @@ describe('WingNav testing', () => {
 
   
 });
-
-

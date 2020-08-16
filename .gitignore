@@ -1,6 +1,6 @@
 .env
 /node_modules
-/Client/node_modules
+dist
 /Client/dist
 /Client/coverage
 /jsdoc

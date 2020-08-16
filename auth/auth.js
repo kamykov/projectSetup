@@ -1,35 +1,28 @@
-const passport = require("koa-passport");
-const LocalStrategy = require("passport-local").Strategy;
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
+const User = require('../models/user');
 
-const User = require("../models/user");
 const options = {};
 
-module.exports = function(passport) {
+module.exports = function (passport) {
   passport.use(
     new LocalStrategy(options, (username, password, done) => {
       User.findOne({
-        username: username
-      }).then(user => {
+        username,
+      }).then((user) => {
         if (!user) {
-          return done(null, false, {
-            message: "No user Found"
-          });
+          return done(null, false, 'Auth.Login.Fail.User.Not.Found');
         }
-        // Match
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;
           if (isMatch) {
-            return done(null, user);
-          } else {
-            return done(null, false, {
-              message: "Password incorrect"
-            });
+            user.password = null;
+            return done(null, user, 'Auth.Login.Success');
           }
+          return done(null, false, 'Auth.Login.Fail');
         });
       });
-    })
+    }),
   );
 
   passport.serializeUser((user, done) => {
@@ -37,7 +30,7 @@ module.exports = function(passport) {
   });
 
   passport.deserializeUser((id, done) => {
-    User.findById(id, function(err, user) {
+    User.findById(id, (err, user) => {
       done(err, user);
     });
   });

@@ -5,5 +5,8 @@ exports[`Panel Testing should render 1`] = `ShallowWrapper {}`;
 exports[`Panel Testing should render correctly with props 1`] = `
 <Panel
   dots={14}
+  max={30}
+  min={0}
+  onChange={[Function]}
 />
 `;

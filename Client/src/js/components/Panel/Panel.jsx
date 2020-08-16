@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Panel.scss';
 
 export default function Panel({
   max, min, dots, onChange,
@@ -29,5 +28,5 @@ Panel.defaultProps = {
   max: 30,
   min: 0,
   dots: 5,
-  onChange: () => {},
+  onChange: () => { },
 };
