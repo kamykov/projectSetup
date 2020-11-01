@@ -33,7 +33,6 @@ mongoose
 mongoose.set('debug', true);
 mongoose.connection.once('open', () => { console.log('connected to database'); });
 
-
 app.keys = ['secret'];
 app.use(bodyParser());
 app.use(cors());
