@@ -33,12 +33,6 @@ mongoose
 mongoose.set('debug', true);
 mongoose.connection.once('open', () => { console.log('connected to database'); });
 
-
-// app.use((ctx, next) => {
-//   console.log(ctx.request);
-//   return next();
-// });
-
 app.keys = ['secret'];
 app.use(bodyParser());
 app.use(cors());
@@ -59,7 +53,6 @@ if (process.env.NODE_ENV === 'production') {
 
 
 app.use(function* (next) {
-  // console.log(this);
   if (this.status !== 404) return;
   console.log('Upsss', this.status);
   this.redirect('/not_found');
